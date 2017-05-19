@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hunter-client/hunter-client.iml" filepath="$PROJECT_DIR$/hunter-client/hunter-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hunter-common/hunter-common.iml" filepath="$PROJECT_DIR$/hunter-common/hunter-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hunter-master/hunter-master.iml" filepath="$PROJECT_DIR$/hunter-master/hunter-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hunter-parent.iml" filepath="$PROJECT_DIR$/hunter-parent.iml" />
+    </modules>
+  </component>
+</project>
