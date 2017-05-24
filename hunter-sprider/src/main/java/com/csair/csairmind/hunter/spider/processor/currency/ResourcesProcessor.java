@@ -1,7 +1,7 @@
 package com.csair.csairmind.hunter.spider.processor.currency;
 
+import com.csair.csairmind.hunter.common.vo.ResourceTask;
 import com.csair.csairmind.hunter.spider.site.ExpandSite;
-import com.csair.csairmind.hunter.spider.vo.ResourceTask;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +10,12 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by zhangcheng
@@ -29,43 +34,62 @@ public class ResourcesProcessor implements PageProcessor {
     }
 
     public void process(Page page) {
-        List<String> urls ;
-        if (StringUtils.isNotBlank(task.getDetails_url_reg())) {
-            urls = getDetailsUrlsReg(page.getHtml());
-            page.addTargetRequests(urls);
-            log.info("正则表达式解析资源，新增详情链接 {} 个",urls.size());
-        } else {
-            urls = getDetailsUrlsXpath(page.getHtml());
-            page.addTargetRequests(urls);
-            log.info("Xpath解析资源，新增详情链接 {} 个",urls.size());
+        List<String> urls;
+        try {
+            if (StringUtils.isNotBlank(task.getDetails_url_reg())) {
+                urls = getDetailsUrlsReg(page);
+                page.addTargetRequests(urls);
+                log.info("正则表达式解析资源，发现详情链接 {} 个", urls.size());
+            } else if (StringUtils.isNotBlank(task.getDetails_url_xpath())) {
+                urls = getDetailsUrlsXpath(page);
+                page.addTargetRequests(urls);
+                log.info("Xpath解析资源，发现详情链接 {} 个", urls.size());
+            } else {
+                urls = getDetailsUrlsJpath(page);
+                page.addTargetRequests(urls);
+                log.info("Jpath解析资源，发现详情链接 {} 个", urls.size());
+            }
+        } catch (Exception ex) {
+            log.error("解析任务失败：{}", ex);
         }
     }
 
     /***
      * 获取详情URL，Xpath形式
-     * @param html
+     * @param page
      * @return
      */
-    public List<String> getDetailsUrlsXpath(Html html) {
-        return html.xpath(task.getDetails_url_xpath()).links().all();
+    public List<String> getDetailsUrlsXpath(Page page) {
+        return page.getHtml().xpath(task.getDetails_url_xpath()).links().all();
     }
 
     /***
      * 获取详情URL，正则表达式形式
-     * @param html
+     * @param page
      * @return
      */
-    public List<String> getDetailsUrlsReg(Html html) {
-        return html.regex(task.getDetails_url_reg()).links().all();
+    public List<String> getDetailsUrlsReg(Page page) {
+        List<String> urls;
+        try {
+            urls = page.getHtml().regex(task.getDetails_url_reg()).links().all();
+        } catch (UnsupportedOperationException ex) {
+            Set<String> urlsSet = new HashSet<String>();
+            Pattern pattern = Pattern.compile(task.getDetails_url_reg());
+            Matcher matcher = pattern.matcher(page.getRawText());
+            while (matcher.find()) {
+                urlsSet.add(matcher.group());
+            }
+            urls = new ArrayList<String>(urlsSet);
+        }
+        return urls;
     }
 
     /***
-     * 获取详情URL，正则表达式形式
-     * @param html
+     * 获取详情URL，Jpath形式
+     * @param page
      * @return
      */
-    public List<String> getDetailsUrlsJpath(Html html) {
-//        html.jsonPath(task.getDetails_url_reg()).
-        return html.regex(task.getDetails_url_reg()).links().all();
+    public List<String> getDetailsUrlsJpath(Page page) {
+        return page.getJson().xpath(task.getDetails_url_jpath()).links().all();
     }
 }

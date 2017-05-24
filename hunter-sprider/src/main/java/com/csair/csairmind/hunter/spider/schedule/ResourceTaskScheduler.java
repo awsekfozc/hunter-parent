@@ -1,12 +1,10 @@
 package com.csair.csairmind.hunter.spider.schedule;
 
 
-import com.alibaba.fastjson.JSON;
 import com.csair.csairmind.hunter.common.constant.SprderConstants;
-import org.apache.commons.codec.digest.DigestUtils;
+import com.csair.csairmind.hunter.spider.factory.RedisFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.scheduler.Scheduler;
@@ -15,17 +13,9 @@ import us.codecraft.webmagic.scheduler.Scheduler;
  * Created by zhangcheng
  * 资源解析任务调度器
  */
-public class ResourceTaskScheduler implements Scheduler {
+public class ResourceTaskScheduler implements DistinctScheduler {
 
-    protected JedisPool pool;
-
-    public ResourceTaskScheduler(String host) {
-        this(new JedisPool(new JedisPoolConfig(), host));
-    }
-
-    public ResourceTaskScheduler(JedisPool pool) {
-        this.pool = pool;
-    }
+    private JedisPool pool = RedisFactory.getInstance();
 
     @Override
     public void push(Request request, Task task) {
@@ -40,5 +30,15 @@ public class ResourceTaskScheduler implements Scheduler {
     @Override
     public Request poll(Task task) {
         return null;
+    }
+
+    @Override
+    public void pushDistinctQueue(String info) {
+        Jedis jedis = pool.getResource();
+        try {
+            jedis.hset(SprderConstants.R_DISTINCT_QUEUE, info,"");
+        } finally {
+            pool.returnResource(jedis);
+        }
     }
 }

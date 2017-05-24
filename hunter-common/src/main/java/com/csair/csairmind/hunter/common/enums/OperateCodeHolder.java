@@ -5,6 +5,7 @@ import lombok.ToString;
 
 /**
  * Created by zhengcheng
+ * 请求状态
  */
 @ToString
 public enum OperateCodeHolder {
@@ -56,6 +57,4 @@ public enum OperateCodeHolder {
         }
         return null;
     }
-
-
 }

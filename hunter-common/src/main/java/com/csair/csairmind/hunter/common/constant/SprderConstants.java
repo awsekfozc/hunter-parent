@@ -9,16 +9,14 @@ public class SprderConstants {
     //注册进来的机器 hash
     public static final String MACHINE_QUEUE_PREFIX = "machine_queue";
 
-    //机器现在在处理的内容 hash
-    public static final String MACHINE_RUN = "machine_run";
+    //去重列表 hash
+    public static final String R_DISTINCT_QUEUE = "r_distinct_queue";
 
+    //待解析的资源任务列表  list
+    public static final String R_RESOURCE_TASK = "r_resource_task";
 
-    //任务列表hash(由OA写入或者手工创建任务)
-    public static final String TASK_QUEUE = "task_queue";
-    //待处理任务 hash
-    public static final String TASK_WAIT_QUEUE = "task_wait_queue";
-    //正在解释任务 hash
-    public static final String TASK_RUNING_QUEUE = "task_runing_queue";
+    //待解析的详情任务列表  list
+    public static final String R_DETAILS_TASK = "r_details_task";
 
 
     //待爬取内容任务 加上任务ID作为key的list

@@ -13,6 +13,7 @@
         <module>hunter-master</module>
         <module>hunter-common</module>
         <module>hunter-client</module>
+        <module>hunter-sprider</module>
     </modules>
 
     <parent>
@@ -35,6 +36,10 @@
             <artifactId>spring-boot-starter-redis</artifactId>
         </dependency>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -47,10 +52,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
