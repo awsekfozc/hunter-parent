@@ -90,8 +90,6 @@ public class SpriderTest {
     @Test
     public void testResourceProcessor() {
 
-        ////////////////
-        ////////////////
         Jedis jedis = pool.getResource();
         jedis.lpush(SprderConstants.R_RESOURCE_TASK, JSON.toJSONString(resource_taskRule));
         ResourceTask task = JSON.parseObject(jedis.lpop(SprderConstants.R_RESOURCE_TASK), ResourceTask.class);
