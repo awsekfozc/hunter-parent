@@ -14,6 +14,7 @@
         <module>hunter-common</module>
         <module>hunter-client</module>
         <module>hunter-sprider</module>
+        <module>hunter-service</module>
     </modules>
 
     <parent>
