@@ -8,13 +8,16 @@ import lombok.Data;
 @Data
 public class DetailsTask {
 
+    //请求路径
+    private String request_url;
+
     //标题抽取规则
     private String title_extract_rule;
 
     //时间抽取规则
     private String date_extract_rule;
 
-    //来源抽取规则
+    //数据连接抽取规则
     private String source_extract_rule;
 
     //内容抽取规则
@@ -22,4 +25,7 @@ public class DetailsTask {
 
     //数据来源
     private String data_source;
+
+    //任务类型
+    private Integer task_type;
 }

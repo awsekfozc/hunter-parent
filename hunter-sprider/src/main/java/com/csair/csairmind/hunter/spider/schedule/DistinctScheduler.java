@@ -7,4 +7,6 @@ import us.codecraft.webmagic.scheduler.Scheduler;
  */
 public interface DistinctScheduler extends Scheduler {
    void pushDistinctQueue(String info);
+
+   void pushTask(String taskStr);
 }

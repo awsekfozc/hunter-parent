@@ -1,9 +1,11 @@
 import com.alibaba.fastjson.JSON;
 import com.csair.csairmind.hunter.common.constant.SprderConstants;
 import com.csair.csairmind.hunter.common.enums.SpriderEnums;
+import com.csair.csairmind.hunter.common.vo.DetailsTask;
 import com.csair.csairmind.hunter.common.vo.ResourceTask;
 import com.csair.csairmind.hunter.spider.ExpandSpider;
 import com.csair.csairmind.hunter.spider.factory.DistinctFactory;
+import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.ResourcesProcessor;
 import com.csair.csairmind.hunter.spider.schedule.ResourceTaskScheduler;
 import org.junit.Before;
@@ -14,9 +16,11 @@ import redis.clients.jedis.JedisPoolConfig;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -82,7 +86,12 @@ public class SpriderTest {
         resource_taskRule.put("details_url_reg", "");
         resource_taskRule.put("details_url_jpath", "");
         resource_taskRule.put("distinct_type", 1);
-
+        resource_taskRule.put("title_extract_rule", "//*[@id=\"the-post\"]/div/h1/span/text()");
+        resource_taskRule.put("date_extract_rule", "//*[@id=\"the-post\"]/div/p/span[2]/text()");
+        resource_taskRule.put("source_extract_rule", "");
+        resource_taskRule.put("content_extract_rule", "//*[@id=\"the-post\"]/div/div[3]/tidyText()");
+        resource_taskRule.put("data_source", "中国民用航空网-新闻头条");
+        resource_taskRule.put("task_type", 1);
 
         pool = new JedisPool(new JedisPoolConfig(), "127.0.0.1");
     }
@@ -93,7 +102,7 @@ public class SpriderTest {
         jedis.lpush(SprderConstants.R_RESOURCE_TASK, JSON.toJSONString(resource_taskRule));
         ResourceTask task = JSON.parseObject(jedis.lpop(SprderConstants.R_RESOURCE_TASK), ResourceTask.class);
         System.out.println(task);
-        ExpandSpider.create(new ResourcesProcessor(task),pool)
+        ExpandSpider.create(new ResourcesProcessor(task), pool)
                 .setScheduler(new ResourceTaskScheduler())
                 .setStartRequest(task.getUrl())
                 .setDistinct(DistinctFactory.getInstance(task.getDistinct_type()))
@@ -103,16 +112,36 @@ public class SpriderTest {
     }
 
     @Test
-    public void testSprider(){
+    public void testDetailsProcessor() {
+        Jedis jedis = pool.getResource();
+
+        DetailsTask task = JSON.parseObject(jedis.hget(SprderConstants.R_DETAILS_TASK, jedis.lpop(SprderConstants.R_DETAILS_TASK_KEY)), DetailsTask.class);
+        System.out.println(task);
+        ExpandSpider.create(new DetailsSingleProcessor(task), pool)
+                .setScheduler(new ResourceTaskScheduler())
+                .setStartRequest(task.getRequest_url())
+                .setTask_type(SpriderEnums.DETAILS_PROCESSOR_TYPE.getCode())
+                .setPipeline(new ConsolePipeline())
+                .run();
+    }
+
+    @Test
+    public void testSprider() {
         Spider spider = new Spider(new PageProcessor() {
             public void process(Page page) {
-                System.out.println(page.getHtml().xpath("//*[@id=\"ddlSCQY\"]/tidyText()"));
+                List<String> keys = page.getHtml().xpath("//*[@id=\"tblParameter\"]/tbody/tr/td[1]/text()").all();
+                List<String> values = page.getHtml().xpath("//*[@id=\"tblParameter\"]/tbody/tr/td[2]/text()").all();
+                for(int i=0;i<keys.size();i++){
+                    System.out.println(keys.get(i)+":"+values.get(i));
+                }
             }
 
             public Site getSite() {
                 return Site.me();
             }
         });
-        spider.test("http://shouji.tenaa.com.cn/");
+        spider.test("http://shouji.tenaa.com.cn/Mobile/MobileDetail.aspx?code=zDErPbEoeuD%2bnkcpPwz8l9xxA62prHsK1Y%2bJz2RuDWw%3d");
     }
+
+
 }

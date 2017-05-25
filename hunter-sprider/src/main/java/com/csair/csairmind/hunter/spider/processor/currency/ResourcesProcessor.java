@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import us.codecraft.webmagic.Page;
+import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
@@ -38,16 +39,19 @@ public class ResourcesProcessor implements PageProcessor {
         try {
             if (StringUtils.isNotBlank(task.getDetails_url_reg())) {
                 urls = getDetailsUrlsReg(page);
-                page.addTargetRequests(urls);
                 log.info("正则表达式解析资源，发现详情链接 {} 个", urls.size());
             } else if (StringUtils.isNotBlank(task.getDetails_url_xpath())) {
                 urls = getDetailsUrlsXpath(page);
-                page.addTargetRequests(urls);
                 log.info("Xpath解析资源，发现详情链接 {} 个", urls.size());
             } else {
                 urls = getDetailsUrlsJpath(page);
-                page.addTargetRequests(urls);
                 log.info("Jpath解析资源，发现详情链接 {} 个", urls.size());
+            }
+            for(String url:urls){
+                Request request = new Request(url);
+                task.setRequest_url(url);
+                request.setExtras(task.getDetailsParam());
+                page.addTargetRequest(request);
             }
         } catch (Exception ex) {
             log.error("解析任务失败：{}", ex);

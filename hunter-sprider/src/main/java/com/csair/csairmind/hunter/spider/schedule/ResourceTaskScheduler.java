@@ -1,6 +1,7 @@
 package com.csair.csairmind.hunter.spider.schedule;
 
 
+import com.alibaba.fastjson.JSON;
 import com.csair.csairmind.hunter.common.constant.SprderConstants;
 import com.csair.csairmind.hunter.spider.factory.RedisFactory;
 import redis.clients.jedis.Jedis;
@@ -21,7 +22,8 @@ public class ResourceTaskScheduler implements DistinctScheduler {
     public void push(Request request, Task task) {
         Jedis jedis = this.pool.getResource();
         try {
-            jedis.lpush(SprderConstants.R_DETAILS_TASK, request.getUrl());
+            jedis.lpush(SprderConstants.R_DETAILS_TASK_KEY, request.getUrl());
+            jedis.hset(SprderConstants.R_DETAILS_TASK, request.getUrl(), JSON.toJSONString(request.getExtras()));
         } finally {
             this.pool.returnResource(jedis);
         }
@@ -39,6 +41,17 @@ public class ResourceTaskScheduler implements DistinctScheduler {
             jedis.hset(SprderConstants.R_DISTINCT_QUEUE, info,"");
         } finally {
             pool.returnResource(jedis);
+        }
+    }
+
+    @Override
+    public void pushTask(String taskStr) {
+
+        Jedis jedis = this.pool.getResource();
+        try {
+            jedis.lpush(SprderConstants.R_DETAILS_TASK, taskStr);
+        } finally {
+            this.pool.returnResource(jedis);
         }
     }
 }

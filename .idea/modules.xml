@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/hunter-common/hunter-common.iml" filepath="$PROJECT_DIR$/hunter-common/hunter-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/hunter-master/hunter-master.iml" filepath="$PROJECT_DIR$/hunter-master/hunter-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/hunter-parent.iml" filepath="$PROJECT_DIR$/hunter-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hunter-scheduler/hunter-scheduler.iml" filepath="$PROJECT_DIR$/hunter-scheduler/hunter-scheduler.iml" />
       <module fileurl="file://$PROJECT_DIR$/hunter-service/hunter-service.iml" filepath="$PROJECT_DIR$/hunter-service/hunter-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/hunter-sprider/hunter-sprider.iml" filepath="$PROJECT_DIR$/hunter-sprider/hunter-sprider.iml" />
     </modules>

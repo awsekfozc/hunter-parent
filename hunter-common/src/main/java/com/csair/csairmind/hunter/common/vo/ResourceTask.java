@@ -3,6 +3,9 @@ package com.csair.csairmind.hunter.common.vo;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by zhangcheng on 2017/5/23 0023.
  * 资源解析任务实体类
@@ -36,4 +39,40 @@ public class ResourceTask {
 
     //去重类型
     private Integer distinct_type = 1;
+
+    /***
+     * 以下为详情解析任务需要信息
+     */
+    //请求路径
+    private String request_url;
+
+    //标题抽取规则
+    private String title_extract_rule;
+
+    //时间抽取规则
+    private String date_extract_rule;
+
+    //数据连接抽取规则
+    private String source_extract_rule;
+
+    //内容抽取规则
+    private String content_extract_rule;
+
+    //数据来源
+    private String data_source;
+
+    //任务类型
+    private Integer task_type;
+
+    public Map<String,Object> getDetailsParam(){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("request_url",request_url);
+        map.put("title_extract_rule",title_extract_rule);
+        map.put("date_extract_rule",date_extract_rule);
+        map.put("source_extract_rule",source_extract_rule);
+        map.put("content_extract_rule",content_extract_rule);
+        map.put("data_source",data_source);
+        map.put("task_type",task_type);
+        return map;
+    }
 }

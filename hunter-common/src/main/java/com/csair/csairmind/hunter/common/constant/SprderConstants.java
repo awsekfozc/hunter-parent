@@ -15,8 +15,11 @@ public class SprderConstants {
     //待解析的资源任务列表  list
     public static final String R_RESOURCE_TASK = "r_resource_task";
 
-    //待解析的详情任务列表  list
+    //待解析的详情任务列表  hash
     public static final String R_DETAILS_TASK = "r_details_task";
+
+    //待解析的详情任务列表_键  list
+    public static final String R_DETAILS_TASK_KEY = "r_details_task_key";
 
 
     //待爬取内容任务 加上任务ID作为key的list
