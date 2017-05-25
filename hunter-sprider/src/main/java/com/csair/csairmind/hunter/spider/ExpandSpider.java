@@ -41,7 +41,6 @@ public class ExpandSpider implements Task, Runnable {
     private Site site;
     private String uuid;
     private DistinctScheduler scheduler;
-    protected CountableThreadPool threadPool;
     private int threadNum = 1;
     private AtomicInteger stat = new AtomicInteger(0);
     private boolean spawnUrl = true;

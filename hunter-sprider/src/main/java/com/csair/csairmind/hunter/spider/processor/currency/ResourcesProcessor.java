@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by zhangcheng
- * 资源解析任务处理
+ * 资源解析任务处理器
  */
 @Data
 @Slf4j
