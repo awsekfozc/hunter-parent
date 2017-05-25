@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a61c5caf-aa17-4b59-adb1-307931feb46a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-client/hunter-client.iml" afterPath="$PROJECT_DIR$/hunter-client/hunter-client.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-common/hunter-common.iml" afterPath="$PROJECT_DIR$/hunter-common/hunter-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-master/hunter-master.iml" afterPath="$PROJECT_DIR$/hunter-master/hunter-master.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-parent.iml" afterPath="$PROJECT_DIR$/hunter-parent.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-sprider/hunter-sprider.iml" afterPath="$PROJECT_DIR$/hunter-sprider/hunter-sprider.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-sprider/src/test/java/SpriderTest.java" afterPath="$PROJECT_DIR$/hunter-sprider/src/test/java/SpriderTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/hunter-client/target/" />
@@ -28,13 +33,12 @@
       <file leaf-file-name="SpriderTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hunter-sprider/src/test/java/SpriderTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="93" column="10" lean-forward="false" selection-start-line="93" selection-start-column="10" selection-end-line="93" selection-end-column="10" />
+            <state relative-caret-position="60">
+              <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1004#1020#0" expanded="true" />
-                <element signature="e#5469#5470#0" expanded="true" />
-                <element signature="e#5517#5518#0" expanded="true" />
+                <element signature="e#1004#1020#0" expanded="false" />
+                <element signature="e#5446#5447#0" expanded="false" />
+                <element signature="e#5494#5495#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -43,7 +47,7 @@
       <file leaf-file-name="SpriderEnums.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/enums/SpriderEnums.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
+            <state relative-caret-position="189">
               <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="24" />
               <folding />
             </state>
@@ -55,7 +59,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
               <caret line="21" column="7" lean-forward="false" selection-start-line="21" selection-start-column="3" selection-end-line="21" selection-end-column="7" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#852#853#0" expanded="false" />
+                <element signature="e#884#885#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -63,11 +71,9 @@
       <file leaf-file-name="UrlDistinct.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/distinct/UrlDistinct.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
+            <state relative-caret-position="405">
               <caret line="19" column="48" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="48" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -75,10 +81,17 @@
       <file leaf-file-name="ExpandSpider.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/ExpandSpider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
+            <state relative-caret-position="486">
               <caret line="44" column="30" lean-forward="false" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#6026#6027#0" expanded="false" />
+                <element signature="e#6058#6059#0" expanded="false" />
+                <element signature="e#6938#6939#0" expanded="false" />
+                <element signature="e#6971#6972#0" expanded="false" />
+                <element signature="e#7238#7239#0" expanded="false" />
+                <element signature="e#7270#7271#0" expanded="false" />
+                <element signature="e#7442#7443#0" expanded="false" />
+                <element signature="e#7477#7478#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -97,9 +110,11 @@
       <file leaf-file-name="OperateCodeHolder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/enums/OperateCodeHolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
+            <state relative-caret-position="297">
               <caret line="12" column="39" lean-forward="false" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="39" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -107,12 +122,9 @@
       <file leaf-file-name="Page.class" pinned="false" current-in-tab="false">
         <entry file="jar://E:/softwares/maven/repository/us/codecraft/webmagic-core/0.6.1/webmagic-core-0.6.1.jar!/us/codecraft/webmagic/Page.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
+            <state relative-caret-position="3024">
               <caret line="139" column="32" lean-forward="false" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
-              <folding>
-                <element signature="e#3910#3911#0" expanded="true" />
-                <element signature="e#3949#3950#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -120,11 +132,10 @@
       <file leaf-file-name="ResourceTaskScheduler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/schedule/ResourceTaskScheduler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
+            <state relative-caret-position="729">
               <caret line="35" column="33" lean-forward="false" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="33" />
               <folding>
-                <element signature="e#883#884#0" expanded="true" />
-                <element signature="e#910#911#0" expanded="true" />
+                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -1595,6 +1606,7 @@
       <workItem from="1495587245838" duration="14419000" />
       <workItem from="1495608193484" duration="868000" />
       <workItem from="1495609260265" duration="9071000" />
+      <workItem from="1495675865179" duration="10000" />
     </task>
     <task id="LOCAL-00001" summary="是是">
       <created>1495526475050</created>
@@ -1653,40 +1665,41 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70354000" />
+    <option name="totallyTimeSpent" value="70364000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36312848" sideWeight="0.5028653" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3980447" sideWeight="0.49713466" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Archetypes" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3547486" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46648043" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3980447" sideWeight="0.49713466" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24641834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3547486" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46648043" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1882,9 +1895,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
           <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1936,7 +1946,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1951,10 +1960,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="11" column="39" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="39" />
-          <folding>
-            <element signature="e#314#315#0" expanded="false" />
-            <element signature="e#354#355#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1995,7 +2000,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="10" column="1" lean-forward="false" selection-start-line="6" selection-start-column="32" selection-end-line="10" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2003,7 +2007,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2029,7 +2032,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2037,17 +2039,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/schedule/ResourceTaskScheduler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
+        <state relative-caret-position="729">
           <caret line="35" column="33" lean-forward="false" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="33" />
           <folding>
-            <element signature="e#883#884#0" expanded="true" />
-            <element signature="e#910#911#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2064,29 +2064,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://E:/softwares/maven/repository/us/codecraft/webmagic-core/0.6.1/webmagic-core-0.6.1.jar!/us/codecraft/webmagic/Page.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
+        <state relative-caret-position="3024">
           <caret line="139" column="32" lean-forward="false" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
-          <folding>
-            <element signature="e#3910#3911#0" expanded="true" />
-            <element signature="e#3949#3950#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/Task.java" />
     <entry file="jar://E:/softwares/maven/repository/us/codecraft/webmagic-core/0.6.1/webmagic-core-0.6.1.jar!/us/codecraft/webmagic/Task.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -2097,19 +2086,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/distinct/UrlDistinct.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
+        <state relative-caret-position="405">
           <caret line="19" column="48" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/enums/OperateCodeHolder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
+        <state relative-caret-position="297">
           <caret line="12" column="39" lean-forward="false" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="39" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2117,13 +2106,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="21" column="7" lean-forward="false" selection-start-line="21" selection-start-column="3" selection-end-line="21" selection-end-column="7" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#852#853#0" expanded="false" />
+            <element signature="e#884#885#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/enums/SpriderEnums.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
+        <state relative-caret-position="189">
           <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="24" />
           <folding />
         </state>
@@ -2131,23 +2124,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/ExpandSpider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
+        <state relative-caret-position="486">
           <caret line="44" column="30" lean-forward="false" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#6026#6027#0" expanded="false" />
+            <element signature="e#6058#6059#0" expanded="false" />
+            <element signature="e#6938#6939#0" expanded="false" />
+            <element signature="e#6971#6972#0" expanded="false" />
+            <element signature="e#7238#7239#0" expanded="false" />
+            <element signature="e#7270#7271#0" expanded="false" />
+            <element signature="e#7442#7443#0" expanded="false" />
+            <element signature="e#7477#7478#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hunter-sprider/src/test/java/SpriderTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="93" column="10" lean-forward="false" selection-start-line="93" selection-start-column="10" selection-end-line="93" selection-end-column="10" />
+        <state relative-caret-position="60">
+          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1004#1020#0" expanded="true" />
-            <element signature="e#5469#5470#0" expanded="true" />
-            <element signature="e#5517#5518#0" expanded="true" />
+            <element signature="e#1004#1020#0" expanded="false" />
+            <element signature="e#5446#5447#0" expanded="false" />
+            <element signature="e#5494#5495#0" expanded="false" />
           </folding>
         </state>
       </provider>
