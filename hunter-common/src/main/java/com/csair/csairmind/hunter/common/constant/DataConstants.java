@@ -20,4 +20,7 @@ public class DataConstants {
 
     //数据网址
     public static final String DATA_URL = "data_url";
+
+    //数据集合
+    public static final String DATA_LIEST = "data_list";
 }

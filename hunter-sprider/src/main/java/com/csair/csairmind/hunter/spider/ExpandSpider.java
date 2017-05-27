@@ -1,10 +1,14 @@
 package com.csair.csairmind.hunter.spider;
 
+import com.csair.csairmind.hunter.common.constant.DataConstants;
 import com.csair.csairmind.hunter.common.enums.SpriderEnums;
+import com.csair.csairmind.hunter.common.util.SimHash;
+import com.csair.csairmind.hunter.spider.distinct.ContentDistinct;
 import com.csair.csairmind.hunter.spider.distinct.Distinct;
 import com.csair.csairmind.hunter.spider.distinct.UrlDistinct;
 import com.csair.csairmind.hunter.spider.exception.NoGetReadyException;
 import com.csair.csairmind.hunter.spider.factory.RedisFactory;
+import com.csair.csairmind.hunter.spider.processor.currency.DetailsListProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.ResourcesProcessor;
 import com.csair.csairmind.hunter.spider.schedule.DistinctScheduler;
@@ -13,6 +17,7 @@ import lombok.Data;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import redis.clients.jedis.JedisPool;
 import us.codecraft.webmagic.*;
 import us.codecraft.webmagic.downloader.Downloader;
@@ -49,7 +54,6 @@ public class ExpandSpider implements Task, Runnable {
     private Request startRequest;
     private Distinct distinct;
     //任务类型，解析任务或者详情任务
-    private Integer task_type;
 
     public static ExpandSpider create(PageProcessor pageProcessor, JedisPool pool) {
         return new ExpandSpider(pageProcessor, pool);
@@ -71,8 +75,10 @@ public class ExpandSpider implements Task, Runnable {
             if (startRequest != null) {
                 if (pageProcessor instanceof ResourcesProcessor)//解析任务处理
                     this.processResourceRequest(startRequest);
-                else if(pageProcessor instanceof DetailsSingleProcessor)//详情单条任务处理
+                else if (pageProcessor instanceof DetailsSingleProcessor)//详情单条任务处理
                     this.processDetailsSingleRequest(startRequest);
+                else if (pageProcessor instanceof DetailsListProcessor)//详情List任务处理
+                    this.processDetailsListRequest(startRequest);
             }
         } catch (Exception var5) {
             log.error(var5.getMessage());
@@ -118,6 +124,42 @@ public class ExpandSpider implements Task, Runnable {
     }
 
     /***
+     * 解析列表详情任务处理
+     * @param request
+     */
+    protected void processDetailsListRequest(Request request) {
+        Page page = this.downloader.download(request, this);
+        if (page == null) {
+        } else {
+            this.pageProcessor.process(page);
+            if (!page.getResultItems().isSkip()) {
+                List<Map<String, Object>> data_list = page.getResultItems().get(DataConstants.DATA_LIEST);
+                Iterator var3 = this.pipelines.iterator();
+                String distinctCode = "";//将要保存的去重码，URL或内容特征码
+                for (Map<String, Object> map : data_list) {
+                    if (distinct instanceof UrlDistinct && distinct != null) {//如果是URL去重
+                        distinctCode = map.get(DataConstants.DATA_URL).toString();
+                        if (distinct.isDistinct(distinctCode))//如果存在URL，不添加到资源池中
+                            continue;
+                    } else if (distinct instanceof ContentDistinct && distinct != null) {//如果是内容去重
+                        //内容去重的条件为标题+时间
+                        String content = String.format("%s,%s", map.get(DataConstants.TITLE), map.get(DataConstants.DATE_TIME));
+                        distinctCode = SimHash.getSimCode(content);
+                        if (distinct.isDistinct(content))//如果存在URL，不添加到资源池中
+                            continue;
+                    }
+                    while (var3.hasNext()) {
+                        Pipeline pipeline = (Pipeline) var3.next();
+                        pipeline.process(page.getResultItems(), this);
+                    }
+                    this.scheduler.pushDistinctQueue(distinctCode);//任务完成，保存去重信息
+                }
+            }
+
+        }
+    }
+
+    /***
      * 检查爬虫相关组件
      */
     protected void initComponent() {
@@ -157,10 +199,10 @@ public class ExpandSpider implements Task, Runnable {
      * 检查爬虫是否准备就绪
      */
     private void checkRunningStat() throws NoGetReadyException {
-        if (scheduler == null)
-            throw new NoGetReadyException("资源调度器未设置");
-        else if (startRequest == null)
+        if (startRequest == null)
             throw new NoGetReadyException("初始请求未设置");
+//        else if (scheduler == null)
+//            throw new NoGetReadyException("资源调度器未设置");
 //        else if (distinct == null)
 //            throw new NoGetReadyException("去重规则未设置");
     }
@@ -260,11 +302,6 @@ public class ExpandSpider implements Task, Runnable {
 
     public ExpandSpider setDistinct(Distinct distinct) {
         this.distinct = distinct;
-        return this;
-    }
-
-    public ExpandSpider setTask_type(Integer task_type) {
-        this.task_type = task_type;
         return this;
     }
 

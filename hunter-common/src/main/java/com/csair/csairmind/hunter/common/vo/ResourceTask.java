@@ -66,7 +66,7 @@ public class ResourceTask {
 
     public Map<String,Object> getDetailsParam(){
         Map<String,Object> map = new HashMap<String,Object>();
-        map.put("request_url",request_url);
+        map.put("url",request_url);
         map.put("title_extract_rule",title_extract_rule);
         map.put("date_extract_rule",date_extract_rule);
         map.put("source_extract_rule",source_extract_rule);

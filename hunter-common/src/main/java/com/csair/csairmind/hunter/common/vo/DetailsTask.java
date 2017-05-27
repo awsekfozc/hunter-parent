@@ -9,7 +9,7 @@ import lombok.Data;
 public class DetailsTask {
 
     //请求路径
-    private String request_url;
+    private String url;
 
     //标题抽取规则
     private String title_extract_rule;

@@ -6,6 +6,7 @@ import com.csair.csairmind.hunter.common.util.ContentUtils;
 import com.csair.csairmind.hunter.common.vo.DetailsTask;
 import com.csair.csairmind.hunter.spider.site.ExpandSite;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
@@ -31,8 +32,8 @@ public class DetailsSingleProcessor implements PageProcessor {
         page.putField(DataConstants.DATE_TIME, page.getHtml().xpath(task.getDate_extract_rule()));
         page.putField(DataConstants.CONTENT, ContentUtils.removeUrlContent(page.getHtml().xpath(task.getContent_extract_rule()).get()));
         page.putField(DataConstants.DATA_SOURCE, task.getData_source());
-        if (task.getTask_type() == SpriderEnums.DETAILS_ALL_PRO.getCode())
-            page.putField(DataConstants.DATA_URL, task.getRequest_url());
+        if (StringUtils.isBlank(task.getSource_extract_rule()))
+            page.putField(DataConstants.DATA_URL, task.getUrl());
         else
             page.putField(DataConstants.DATA_URL, page.getHtml().xpath(task.getSource_extract_rule()));
 

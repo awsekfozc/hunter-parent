@@ -1,7 +1,9 @@
 package com.csair.csairmind.hunter.common.util;
 
+import org.apache.commons.lang3.StringUtils;
 import org.wltea.analyzer.IKSegmentation;
 import org.wltea.analyzer.Lexeme;
+import sun.security.provider.MD5;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -18,7 +20,6 @@ import java.util.*;
 public class SimHash {
 
     private String tokens;
-
 
 
     private BigInteger intSimHash;
@@ -178,8 +179,22 @@ public class SimHash {
         return characters;
     }
 
+    public static String getSimCode(String str) {
+        if (StringUtils.isNotBlank(str)) {
+            String reCode = "";
+            try {
+                SimHash h1 = new SimHash(str);
+                reCode = Md5Code.md5ByHex(h1.getStrSimHash());
+            } catch (IOException ex) {
+
+            }
+            return reCode;
+        }
+        return null;
+    }
+
     public static void main(String[] args) throws IOException {
-        SimHash h1 = new SimHash("否,201606--0999!,50年,厂房lll,宿舍,厂房1,宿舍1,5956.31,3383.02,坪地街道富坪路同富裕工业区,3963.58,深圳市祥地实业有限公司,G10307-0137,4层,6层,2016-12-23,");
+        SimHash h1 = new SimHash("否,201606--0999!,50年,厂房lll ,宿舍,厂房1,宿舍1,5956.31,3383.02,坪地街道富坪路同富裕工业区,3963.58,深圳市祥地实业有限公司,G10307-0137,4层,6层,2016-12-23,");
         SimHash h2 = new SimHash("否，3383.02,201606--0999!,50年,厂房lll,宿舍,厂房1,宿舍1,5956.31,坪地街道富坪路同富裕工业区,3963.58,深圳市祥地实业有限公司,G10307-0137,4层,6层,2016-12-23,");
         System.out.println(h1.getStrSimHash());
         System.out.println(h2.getStrSimHash());
@@ -187,5 +202,7 @@ public class SimHash {
         System.out.println(h2.getStrSimHash());
         System.out.println(h1.hammingDistance(h2));
         System.out.println(h1.subByDistance(h2, 3));
+
+        System.out.println(getSimCode("sdsdqweqwe"));
     }
 }

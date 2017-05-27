@@ -1,13 +1,15 @@
 import com.alibaba.fastjson.JSON;
 import com.csair.csairmind.hunter.common.constant.SprderConstants;
-import com.csair.csairmind.hunter.common.enums.SpriderEnums;
 import com.csair.csairmind.hunter.common.vo.DetailsTask;
 import com.csair.csairmind.hunter.common.vo.ResourceTask;
 import com.csair.csairmind.hunter.spider.ExpandSpider;
+import com.csair.csairmind.hunter.spider.distinct.ContentDistinct;
 import com.csair.csairmind.hunter.spider.factory.DistinctFactory;
+import com.csair.csairmind.hunter.spider.processor.currency.DetailsListProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.ResourcesProcessor;
 import com.csair.csairmind.hunter.spider.schedule.ResourceTaskScheduler;
+import org.apache.http.HttpHost;
 import org.junit.Before;
 import org.junit.Test;
 import redis.clients.jedis.Jedis;
@@ -80,7 +82,7 @@ public class SpriderTest {
 //        resource_taskRule.put("details_url_reg", "");
 //        resource_taskRule.put("details_url_jpath", "");
 
-        //2.1.1.12中国民用航空网
+//        //2.1.1.12中国民用航空网
         resource_taskRule.put("url", "http://www.ccaonline.cn/news/top/page/2");
         resource_taskRule.put("details_url_xpath", "//*[@id=\"main-content\"]/div[1]/div[3]/article/h2");
         resource_taskRule.put("details_url_reg", "");
@@ -92,6 +94,8 @@ public class SpriderTest {
         resource_taskRule.put("content_extract_rule", "//*[@id=\"the-post\"]/div/div[3]/tidyText()");
         resource_taskRule.put("data_source", "中国民用航空网-新闻头条");
         resource_taskRule.put("task_type", 1);
+
+
 
         pool = new JedisPool(new JedisPoolConfig(), "127.0.0.1");
     }
@@ -106,21 +110,42 @@ public class SpriderTest {
                 .setScheduler(new ResourceTaskScheduler())
                 .setStartRequest(task.getUrl())
                 .setDistinct(DistinctFactory.getInstance(task.getDistinct_type()))
-                .setTask_type(SpriderEnums.RESOURCE_PROCESSOR_TYPE.getCode())
                 .run();
-        pool.returnResource(jedis);
     }
 
     @Test
-    public void testDetailsProcessor() {
+    public void testDetailsSingleProcessor() {
         Jedis jedis = pool.getResource();
-
         DetailsTask task = JSON.parseObject(jedis.hget(SprderConstants.R_DETAILS_TASK, jedis.lpop(SprderConstants.R_DETAILS_TASK_KEY)), DetailsTask.class);
         System.out.println(task);
         ExpandSpider.create(new DetailsSingleProcessor(task), pool)
                 .setScheduler(new ResourceTaskScheduler())
-                .setStartRequest(task.getRequest_url())
-                .setTask_type(SpriderEnums.DETAILS_PROCESSOR_TYPE.getCode())
+                .setStartRequest(task.getUrl())
+                .setPipeline(new ConsolePipeline())
+                .run();
+    }
+
+    @Test
+    public void testDetailsListProcessor(){
+        //2.1.1.3民航资源网-用户评论
+        resource_taskRule.put("url", "https://www.capse.net/sound/comments");
+        resource_taskRule.put("details_url_xpath", "");
+        resource_taskRule.put("details_url_reg", "");
+        resource_taskRule.put("details_url_jpath", "");
+        resource_taskRule.put("distinct_type", 1);
+        resource_taskRule.put("title_extract_rule", "/html/body/div[2]/dl/dd/h1/a/text()");
+        resource_taskRule.put("date_extract_rule", "/html/body/div[2]/dl/dd/p[3]/text()");
+        resource_taskRule.put("source_extract_rule", "");
+        resource_taskRule.put("content_extract_rule", "/html/body/div[2]/dl/dd/p[1]/text()");
+        resource_taskRule.put("data_source", "民航资源网-用户评论");
+        resource_taskRule.put("task_type", 2);
+        Jedis jedis = pool.getResource();
+        jedis.lpush(SprderConstants.R_RESOURCE_TASK, JSON.toJSONString(resource_taskRule));
+        DetailsTask task = JSON.parseObject(jedis.lpop(SprderConstants.R_RESOURCE_TASK), DetailsTask.class);
+        System.out.println(task);
+        ExpandSpider.create(new DetailsListProcessor(task), pool)
+                .setStartRequest(task.getUrl())
+                .setDistinct(new ContentDistinct())
                 .setPipeline(new ConsolePipeline())
                 .run();
     }
@@ -129,19 +154,17 @@ public class SpriderTest {
     public void testSprider() {
         Spider spider = new Spider(new PageProcessor() {
             public void process(Page page) {
-                List<String> keys = page.getHtml().xpath("//*[@id=\"tblParameter\"]/tbody/tr/td[1]/text()").all();
-                List<String> values = page.getHtml().xpath("//*[@id=\"tblParameter\"]/tbody/tr/td[2]/text()").all();
-                for(int i=0;i<keys.size();i++){
-                    System.out.println(keys.get(i)+":"+values.get(i));
-                }
+                System.out.println(page.getHtml());
             }
 
             public Site getSite() {
-                return Site.me();
+                return Site.me()
+                        .addHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36")
+                        .addHeader("Cookie","Hm_lvt_a5257df898f02b3e0889ce42109b2628=1492999687,1493023645,1493024323,1493861217; _ga=GA1.2.1820557420.1492743250; XSRF-TOKEN=eyJpdiI6InVjUnFHQzdINDNLMU1qMW1LWnpwZ2c9PSIsInZhbHVlIjoialplMHBxbWlYRVwvMWhWZmZhM1F3VVk5WDJoUEx5V2l2Nk1pRlwvbURHWFVzQ1NBWmpHZUlVWURKeW5iamRNV2hCbG5Zb2ltZDdFVzlDYUpubCsrVjEyQT09IiwibWFjIjoiNjQxMDlhMTIzNGYxMzRlMzk3ZTc5ZDY3ZTM3MzZlN2E3YzEzMDNkOGMzMjY0ZTIxMGRkMGMzMjFhNjE0MGI5OCJ9; laravel_session=eyJpdiI6IjZGTVwvekRRdmJTOU5iUldrUTF0S1dnPT0iLCJ2YWx1ZSI6Ik55R2NVYjM4R2pcL0U0bWNTVGp4Z2lQT1wvXC8xdTZtU3VOQmVLaTdaR1JCRURoMTRiM2tNRHNOMXlNNnNqSUJGbFhMa2pHNmVrYzQ5dk9QZXl2dEFaQVRRPT0iLCJtYWMiOiI1ZmJjYjdjMDFmNjQxM2UzZDNiNjhhMTE1MTI3ZDFhMDMyZDU3Y2U0OWVkMDI0MmNmZWNlZmQ2MWNmNTZjNzRhIn0%3D")
+                        .addHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
+                        ;
             }
         });
-        spider.test("http://shouji.tenaa.com.cn/Mobile/MobileDetail.aspx?code=zDErPbEoeuD%2bnkcpPwz8l9xxA62prHsK1Y%2bJz2RuDWw%3d");
+        spider.test("https://www.capse.net/sound/comments?page=1&limit=20");
     }
-
-
 }
