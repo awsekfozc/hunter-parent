@@ -14,7 +14,7 @@ import java.util.*;
  * Created by ZC on 2016/5/9.
  * sim算法，比较文本相似度。4以内为相识度很高的文本。
  * 生成64位签名。用于去重操作
- * 中文采用IKAnalyzer3.2.8分词
+ * 中文采用IKAnalyzer分词
  */
 
 public class SimHash {
@@ -55,7 +55,7 @@ public class SimHash {
     public BigInteger simHash() throws IOException {
         // 定义特征向量/数组，这里选择默认64位
         int[] v = new int[this.hashbits];
-        // 1、中文分词，分词器采用 IKAnalyzer3.2.8
+        // 1、中文分词，分词器采用 IKAnalyzer
         StringReader reader = new StringReader(this.tokens);
         // 当为true时，分词器进行最大词长切分
         IKSegmentation ik = new IKSegmentation(reader, true);
@@ -202,7 +202,6 @@ public class SimHash {
         System.out.println(h2.getStrSimHash());
         System.out.println(h1.hammingDistance(h2));
         System.out.println(h1.subByDistance(h2, 3));
-
         System.out.println(getSimCode("sdsdqweqwe"));
     }
 }

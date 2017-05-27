@@ -21,7 +21,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                //.apis(RequestHandlerSelectors.basePackage("com.neusfot.user.server.api"))
+                .apis(RequestHandlerSelectors.basePackage("com.csair.csairmind.hunter.service.api"))
                 .paths(PathSelectors.any()).build()
                 .useDefaultResponseMessages(false).enable(true);
     }
