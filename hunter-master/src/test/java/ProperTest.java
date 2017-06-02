@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * Created by zhangcheng on 2017/5/11 0011.
+ * Created by zhangcheng
  */
 @RunWith(SpringRunner.class)
 @Import(Bootstrap.class)

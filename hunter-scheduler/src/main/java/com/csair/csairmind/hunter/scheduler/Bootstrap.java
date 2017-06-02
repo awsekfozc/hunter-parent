@@ -1,24 +1,17 @@
-package com.csair.csairmind.hunter.master;
+package com.csair.csairmind.hunter.scheduler;
 
 
-import com.csair.csairmind.hunter.common.plug.IRedisService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableAutoConfiguration
-@ComponentScan(basePackages = {"com.csair.csairmind.hunter.common", "com.csair.csairmind.hunter.master.service"})
-@ImportResource({"classpath:dubbo-producer.xml"})
+@ComponentScan(basePackages = {"com.csair.csairmind.hunter.common","com.csair.csairmind.hunter.scheduler"})
 public class Bootstrap {
-
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Bootstrap.class, args);
-        System.in.read();
-
-
     }
 }

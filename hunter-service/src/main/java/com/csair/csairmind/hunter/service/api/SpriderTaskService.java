@@ -14,13 +14,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @Slf4j
-@Api(tags = {"首页接口"})
-@RequestMapping(value = "/main/index")
-public class AdminIndexService {
+@Api(tags = {"爬虫任务测试接口"})
+@RequestMapping(value = "/sprider")
+public class SpriderTaskService {
 
 
-	@ApiOperation(value = "IP测试")
-    @GetMapping("/resource")
+	@ApiOperation(value = "测试爬虫任务")
+    @GetMapping("/test")
     public void resource(String sysCode, HttpServletResponse httpServletResponse){
 
     }
