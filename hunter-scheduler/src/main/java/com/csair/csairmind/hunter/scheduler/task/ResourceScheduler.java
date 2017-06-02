@@ -18,16 +18,18 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class ResourceScheduler  {
+public class ResourceScheduler {
 
     @Autowired
     IRedisService redisService;
 
     @Scheduled(fixedRate = 3000)
     public void analysisTask() throws InterruptedException {
-        Map<String,String> dataMap = redisService.hgetAll(R_TASK_QUEUE);
-        for(String key:dataMap.keySet())
-            System.out.println(JsonUtil.toBean(dataMap.get(key), SpriderTask.class));
+        Map<String, String> dataMap = redisService.hgetAll(R_TASK_QUEUE);
+        for (String key : dataMap.keySet()) {
+            SpriderTask task = (SpriderTask) JsonUtil.toBean(dataMap.get(key), SpriderTask.class);
+            task.getRequest_time();
+        }
         log.info("执行定时任务");
     }
 }
