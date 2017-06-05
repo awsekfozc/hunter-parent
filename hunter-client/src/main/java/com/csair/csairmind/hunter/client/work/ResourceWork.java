@@ -2,6 +2,7 @@ package com.csair.csairmind.hunter.client.work;
 
 import com.csair.csairmind.hunter.client.api.DefaultApiClient;
 import com.csair.csairmind.hunter.client.content.DefaultApplicationContext;
+
 import static com.csair.csairmind.hunter.common.enums.OperateCodeHolder.RESOURCE_TASK_SUCCESS;
 
 import com.csair.csairmind.hunter.common.config.RedisConfig;
@@ -31,24 +32,26 @@ public class ResourceWork extends BaseThread {
     @Autowired
     RedisConfigVo redisConfigVo;
 
-    public ResourceWork(){
-        super.initClient();
+    public ResourceWork() {
+
     }
+
 
     @Override
     public void doing() {
-        try{
+        super.initClient();
+        try {
             ResourceTaskRequest request = new ResourceTaskRequest();
             OperateResult result = defaultApiClient.execute(request);
             if (!result.getOperateCodeHolder().equals(RESOURCE_TASK_SUCCESS)) {
                 takeARest(1000);
-            }else{
+            } else {
                 ApiResponse response = result.getResponse();
                 ResourceTaskResponse rsp = (ResourceTaskResponse) response;
                 ResourceTask task = rsp.getTask();
                 if (task == null) {
                     log.info("无资源解析任务");
-                }else{
+                } else {
                     log.info("开始执行资源解析任务");
                     ExpandSpider.create(new ResourcesProcessor(task), new JedisPool(redisConfigVo.getHostName()))
                             .setScheduler(new ResourceTaskScheduler())
@@ -57,8 +60,8 @@ public class ResourceWork extends BaseThread {
                             .run();
                 }
             }
-        }catch (Exception e){
-            log.error("申请任务失败，调用接口出错",e);
+        } catch (Exception e) {
+            log.error("申请任务失败，调用接口出错", e);
         }
     }
 }

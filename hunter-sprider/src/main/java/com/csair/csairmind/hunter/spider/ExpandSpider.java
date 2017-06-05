@@ -1,7 +1,6 @@
 package com.csair.csairmind.hunter.spider;
 
 import com.csair.csairmind.hunter.common.constant.DataConstants;
-import com.csair.csairmind.hunter.common.enums.SpriderEnums;
 import com.csair.csairmind.hunter.common.util.SimHash;
 import com.csair.csairmind.hunter.spider.distinct.ContentDistinct;
 import com.csair.csairmind.hunter.spider.distinct.Distinct;
@@ -12,24 +11,19 @@ import com.csair.csairmind.hunter.spider.processor.currency.DetailsListProcessor
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.ResourcesProcessor;
 import com.csair.csairmind.hunter.spider.schedule.DistinctScheduler;
-import com.csair.csairmind.hunter.spider.schedule.ResourceTaskScheduler;
-import lombok.Data;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.omg.PortableInterceptor.INACTIVE;
 import redis.clients.jedis.JedisPool;
-import us.codecraft.webmagic.*;
+import us.codecraft.webmagic.Page;
+import us.codecraft.webmagic.Request;
+import us.codecraft.webmagic.Site;
+import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.downloader.Downloader;
 import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
-import us.codecraft.webmagic.scheduler.QueueScheduler;
 import us.codecraft.webmagic.scheduler.Scheduler;
-import us.codecraft.webmagic.thread.CountableThreadPool;
-import us.codecraft.webmagic.utils.UrlUtils;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -37,7 +31,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by zhangcheng
+ * Created by zhangcheng on 2017/5/23 0023.
  */
 @Slf4j
 public class ExpandSpider implements Task, Runnable {
@@ -83,7 +77,7 @@ public class ExpandSpider implements Task, Runnable {
                     this.processDetailsListRequest(startRequest);
             }
         } catch (Exception var5) {
-            log.error(var5.getMessage());
+            log.error("执行爬虫出错",var5);
         } finally {
             this.close();
         }
@@ -171,7 +165,7 @@ public class ExpandSpider implements Task, Runnable {
         if (this.pipelines.isEmpty()) {
             this.pipelines.add(new ConsolePipeline());
         }
-        this.getSite().setTimeOut(timeOut);
+        this.pageProcessor.getSite().setTimeOut(timeOut);
         this.downloader.setThread(this.threadNum);
     }
 

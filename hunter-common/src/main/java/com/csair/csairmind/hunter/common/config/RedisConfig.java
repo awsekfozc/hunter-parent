@@ -34,6 +34,7 @@ public class RedisConfig {
         log.info("reids服务初始化成功！");
         return factory;
     }
+
     @Bean
     public RedisTemplate<?, ?> getRedisTemplate(){
         RedisTemplate<?,?> template = new StringRedisTemplate(getConnectionFactory());

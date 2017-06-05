@@ -1,5 +1,6 @@
 package com.csair.csairmind.hunter.client.work;
 
+import com.csair.csairmind.hunter.client.content.DefaultApplicationContext;
 import com.csair.csairmind.hunter.common.config.RedisConfigVo;
 import com.csair.csairmind.hunter.common.request.DetalisTaskRequest;
 import com.csair.csairmind.hunter.common.request.OperateResult;
@@ -25,27 +26,25 @@ import static com.csair.csairmind.hunter.common.enums.OperateCodeHolder.DETALIS_
 @Component
 public class DetailsWork extends BaseThread {
 
-    public DetailsWork(){
-        super.initClient();
-    }
 
     @Autowired
     RedisConfigVo redisConfigVo;
 
     @Override
     public void doing() {
-        try{
+        super.initClient();
+        try {
             DetalisTaskRequest request = new DetalisTaskRequest();
             OperateResult result = defaultApiClient.execute(request);
             if (!result.getOperateCodeHolder().equals(DETALIS_TASK_SUCCESS)) {
                 takeARest(1000);
-            }else{
+            } else {
                 ApiResponse response = result.getResponse();
                 DetalisTaskResponse rsp = (DetalisTaskResponse) response;
                 DetailsTask task = rsp.getTask();
                 if (task == null) {
                     log.info("无详情解析任务");
-                }else{
+                } else {
                     log.info("开始执行详情解析任务");
                     ExpandSpider.create(new DetailsSingleProcessor(task), new JedisPool(redisConfigVo.getHostName()))
                             .setScheduler(new ResourceTaskScheduler())
@@ -54,8 +53,8 @@ public class DetailsWork extends BaseThread {
                             .run();
                 }
             }
-        }catch (Exception e){
-            log.error("申请任务失败，调用接口出错",e);
+        } catch (Exception e) {
+            log.error("申请任务失败，调用接口出错", e);
         }
     }
 }

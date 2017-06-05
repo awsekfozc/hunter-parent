@@ -1,7 +1,6 @@
 package com.csair.csairmind.hunter.spider.factory;
 
 import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * Created by zhangcheng

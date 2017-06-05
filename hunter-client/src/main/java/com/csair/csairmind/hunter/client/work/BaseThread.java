@@ -5,6 +5,7 @@ import com.csair.csairmind.hunter.client.content.DefaultApplicationContext;
 import com.csair.csairmind.hunter.common.config.AppValidateInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 线程基类，对thread进行封装
@@ -58,7 +59,7 @@ public abstract class BaseThread implements Worker {
         }
     }
 
-    public void initClient(){
+    public void initClient() {
         String appKey = appValidateInfo.getAppKey();
         String appSecret = appValidateInfo.getAppSecret();
         String machineId = DefaultApplicationContext.MACHINEID;
