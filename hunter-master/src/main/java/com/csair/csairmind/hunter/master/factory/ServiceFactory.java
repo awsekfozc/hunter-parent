@@ -6,6 +6,7 @@ import com.csair.csairmind.hunter.common.spring.ApplicationContextProvider;
 import com.csair.csairmind.hunter.master.service.BeatService;
 import com.csair.csairmind.hunter.master.service.IApiService;
 import com.csair.csairmind.hunter.master.service.RegisterService;
+import com.csair.csairmind.hunter.master.service.ResourceTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,11 +23,11 @@ public class ServiceFactory {
         } else if (ApiHolder.REGISTER.equalsIgnoreCase(apiName)) {
             //注册
             service = ApplicationContextProvider.getBean("registerService", RegisterService.class);
+        }else if(ApiHolder.RESOURCE_TASK_APPLY.equalsIgnoreCase(apiName)){
+            //申请任务
+            service= ApplicationContextProvider.getBean("resourceTaskService", ResourceTaskService.class);
         }
-//        }else if(ApiHolder.TASK_APPLY.equalsIgnoreCase(apiName)){
-//            //申请任务
-//            service= new ApplyTaskService();
-//        }else if(ApiHolder.UPLOAD_URL.equalsIgnoreCase(apiName)){
+        //else if(ApiHolder.UPLOAD_URL.equalsIgnoreCase(apiName)){
 //            //上传URL
 //            service= new UploadResourceService();
 //        }else if(ApiHolder.TASK_GET_STATUS.equalsIgnoreCase(apiName)){

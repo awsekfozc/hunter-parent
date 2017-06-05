@@ -21,7 +21,6 @@ public interface ApiRequest<T extends ApiResponse> {
 
     /**
      * 需要签名的参数
-     *
      * @return
      */
     public HashMap<String, String> getSignParameters();

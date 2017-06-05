@@ -10,8 +10,12 @@ public class ApiHolder {
     public static final String REGISTER = "hunter.api.register";
     //心跳
     public static final String BEAT = "hunter.api.beat";
-    //申请任务
-    public static final String TASK_APPLY = "hunter.api.task.apply";
+    //申请资源解析任务
+    public static final String RESOURCE_TASK_APPLY = "hunter.api.task.resource";
+
+    //申请详情解析任务
+    public static final String DETALIS_TASK_APPLY = "hunter.api.task.detalis";
+
     //上传url列表
     public static final String UPLOAD_URL = "hunter.api.upload.url";
     //上报任务状态

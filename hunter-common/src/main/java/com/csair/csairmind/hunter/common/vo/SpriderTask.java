@@ -2,13 +2,16 @@ package com.csair.csairmind.hunter.common.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * Created by zhangcheng
  * 爬虫任务实体
  */
 @Data
-public class SpriderTask {
+public class SpriderTask implements Serializable {
 
+    private String task_id;
     //地址
     private String url;
     //分页表达式
@@ -34,7 +37,7 @@ public class SpriderTask {
     //任务类型
     private String task_type;
     //增量间隔
-    private String increment_rule;
+    private Long increment_rule;
     //搜索关键字
     private String search_wrods;
     //爬取的最大页数

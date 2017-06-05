@@ -2,11 +2,13 @@ package com.csair.csairmind.hunter.common.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * Created by zhangcheng on 2017/5/25 0025.
  */
 @Data
-public class DetailsTask {
+public class DetailsTask implements Serializable {
 
     //请求路径
     private String url;

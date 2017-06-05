@@ -2,7 +2,9 @@ package com.csair.csairmind.hunter.client.content;
 
 
 import com.csair.csairmind.hunter.client.service.WrapService;
+import com.csair.csairmind.hunter.client.work.DetailsWork;
 import com.csair.csairmind.hunter.client.work.HeartWorker;
+import com.csair.csairmind.hunter.client.work.ResourceWork;
 import com.csair.csairmind.hunter.common.inf.MgrService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,12 @@ public class DefaultApplicationContext implements ApplicationContext {
     @Autowired
     HeartWorker heartWorker;
 
+    @Autowired
+    ResourceWork resourceWork;
+
+    @Autowired
+    DetailsWork detailsWork;
+
     public static ApplicationContext context() {
         if (instance == null) {
             synchronized (sycObject) {
@@ -41,6 +49,8 @@ public class DefaultApplicationContext implements ApplicationContext {
     public void start() {
         if (wrapService.register()) {
             heartWorker.start();
+            resourceWork.start();
+            detailsWork.start();
         } else {
            log.error("注册机器失败........");
         }

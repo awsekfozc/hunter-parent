@@ -18,6 +18,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.omg.PortableInterceptor.INACTIVE;
 import redis.clients.jedis.JedisPool;
 import us.codecraft.webmagic.*;
 import us.codecraft.webmagic.downloader.Downloader;
@@ -36,7 +37,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by zhangcheng on 2017/5/23 0023.
+ * Created by zhangcheng
  */
 @Slf4j
 public class ExpandSpider implements Task, Runnable {
@@ -53,6 +54,7 @@ public class ExpandSpider implements Task, Runnable {
     private boolean spawnUrl = true;
     private Request startRequest;
     private Distinct distinct;
+    private Integer timeOut = 15000;
     //任务类型，解析任务或者详情任务
 
     public static ExpandSpider create(PageProcessor pageProcessor, JedisPool pool) {
@@ -169,6 +171,7 @@ public class ExpandSpider implements Task, Runnable {
         if (this.pipelines.isEmpty()) {
             this.pipelines.add(new ConsolePipeline());
         }
+        this.getSite().setTimeOut(timeOut);
         this.downloader.setThread(this.threadNum);
     }
 
@@ -307,6 +310,11 @@ public class ExpandSpider implements Task, Runnable {
 
     public ExpandSpider setPipeline(Pipeline pipeline) {
         pipelines.add(pipeline);
+        return this;
+    }
+
+    public ExpandSpider setTimeOut(int timeOut) {
+        this.timeOut = timeOut;
         return this;
     }
 }

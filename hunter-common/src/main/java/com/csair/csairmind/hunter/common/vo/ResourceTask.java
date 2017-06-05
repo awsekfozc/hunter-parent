@@ -3,6 +3,7 @@ package com.csair.csairmind.hunter.common.vo;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  */
 @Data
 @ToString
-public class ResourceTask {
+public class ResourceTask implements Serializable {
     //详情URL表达式
     private String details_url_reg;
 
@@ -64,6 +65,10 @@ public class ResourceTask {
     //任务类型
     private Integer task_type;
 
+    /***
+     * 构造详情所需参数
+     * @return
+     */
     public Map<String,Object> getDetailsParam(){
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("url",request_url);

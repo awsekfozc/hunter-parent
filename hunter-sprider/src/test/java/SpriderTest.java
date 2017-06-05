@@ -166,4 +166,16 @@ public class SpriderTest {
         });
         spider.test("https://www.capse.net/sound/comments?page=1&limit=20");
     }
+
+    @Test
+    public void testResourceSingeTask(){
+        String taskStr = "{\"content_extract_rule\":\"//*[@id=\\\"artibody\\\"]/tidyText()\",\"data_source\":\"新浪网\",\"date_extract_rule\":\"//*[@id=\\\"wrapOuter\\\"]/div/div[4]/span/text()\\t\",\"details_url_jpath\":\"\",\"details_url_reg\":\"\",\"details_url_xpath\":\"//*[@id=\\\"result\\\"]/div[4]\",\"distinct_type\":\"1\",\"increment_rule\":60000,\"max_page_size\":\"50\",\"page_reg\":\"http://search.sina.com.cn/?q=%s&range=all&c=news&sort=time&col=&source=&from=&country=&size=&time=&a=&page=%d&pf=2131425470&ps=2134309112&dpc=1\",\"request_time\":\"2017-06-05 15:02:46\",\"search_wrods\":\"南航,航空,南方航空\",\"source_extract_rule\":\"\",\"task_id\":\"10002\",\"task_type\":\"1\",\"title_extract_rule\":\"//*[@id=\\\"artibodyTitle\\\"]/text()\\t\",\"url\":\"http://search.sina.com.cn/?q=%C4%CF%BA%BD&range=all&c=news&sort=time&col=&source=&from=&country=&size=&time=&a=&page=1&pf=2131425470&ps=2134309112&dpc=1\"}\n";
+        ResourceTask task = JSON.parseObject(taskStr, ResourceTask.class);
+        System.out.println(task);
+        ExpandSpider.create(new ResourcesProcessor(task), pool)
+                .setScheduler(new ResourceTaskScheduler())
+                .setStartRequest(task.getUrl())
+                .setDistinct(DistinctFactory.getInstance(task.getDistinct_type()))
+                .run();
+    }
 }

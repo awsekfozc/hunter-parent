@@ -23,7 +23,7 @@ public interface IRedisService {
 
     public <T> List<T> getList(String key, Class<T> clz);
 
-    public long lpush(String key, Object obj);
+    public Long lpush(String key, String obj);
 
     public long rpush(String key, Object obj);
 

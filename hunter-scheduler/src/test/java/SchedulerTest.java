@@ -1,6 +1,7 @@
 import com.alibaba.fastjson.JSON;
 import static com.csair.csairmind.hunter.common.constant.SprderConstants.R_TASK_QUEUE;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
 import redis.clients.jedis.Jedis;
@@ -34,6 +35,7 @@ public class SchedulerTest {
         task.put("max_page_size", 50);
         task.put("search_wrods", "");
         task.put("task_id", "10001");
+        task.put("request_time","2017-6-5 10:00:00");
         return task;
     }
 
@@ -56,6 +58,7 @@ public class SchedulerTest {
         task.put("search_wrods", "南航,航空,南方航空");
         task.put("wrod_code", "GBK");
         task.put("task_id", "10002");
+        task.put("request_time","2017-6-5 10:00:00");
         return task;
     }
 
@@ -76,5 +79,4 @@ public class SchedulerTest {
         jedis.hset(R_TASK_QUEUE, task.get("task_id").toString(),JSON.toJSONString(task));
     }
 
- 
 }

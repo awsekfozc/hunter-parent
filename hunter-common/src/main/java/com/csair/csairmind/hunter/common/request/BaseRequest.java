@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
  * Created by zhangcheng.
  */
 public abstract class BaseRequest implements ApiRequest {
-    private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Override
     public String getTimestamp() {

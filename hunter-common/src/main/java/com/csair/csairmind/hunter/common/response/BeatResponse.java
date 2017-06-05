@@ -2,6 +2,7 @@ package com.csair.csairmind.hunter.common.response;
 
 /**
  * Created by zhangcheng
+ * 心跳请求响应
  */
 public class BeatResponse extends ApiResponse {
 

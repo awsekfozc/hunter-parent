@@ -15,7 +15,12 @@
         <dependency>
             <groupId>com.csair.csairmind.hunter</groupId>
             <artifactId>hunter-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.csair.csairmind.hunter</groupId>
+            <artifactId>hunter-sprider</artifactId>
+            <version>${parent.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -83,17 +83,8 @@ public class RedisServiceImpl implements IRedisService {
     }
 
     @Override
-    public long lpush(final String key, Object obj) {
-        final String value = JSON.toJSONString(obj);
-        long result = redisTemplate.execute(new RedisCallback<Long>() {
-            @Override
-            public Long doInRedis(RedisConnection connection) throws DataAccessException {
-                RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-                long count = connection.lPush(serializer.serialize(key), serializer.serialize(value));
-                return count;
-            }
-        });
-        return result;
+    public Long lpush(String key,String jsonStr) {
+        return redisTemplate.opsForList().rightPush(key,jsonStr);
     }
 
     @Override

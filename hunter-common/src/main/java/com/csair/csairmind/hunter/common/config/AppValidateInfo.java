@@ -17,4 +17,5 @@ public class AppValidateInfo {
     private String appSecret;
     private Integer heartBeatTime;
     private Integer exception_wait_mill_seconds;
+    private Integer applyTaskTime;
 }

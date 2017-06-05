@@ -1,8 +1,6 @@
 package com.csair.csairmind.hunter.master;
 
 
-import com.csair.csairmind.hunter.common.plug.IRedisService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,7 +16,5 @@ public class Bootstrap {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Bootstrap.class, args);
         System.in.read();
-
-
     }
 }

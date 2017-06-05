@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * Created by zhangcheng
+ * 机器注册心跳响应
  */
 @Data
 public class RegisterResponse extends ApiResponse {
