@@ -46,9 +46,9 @@ public class DetailsWork extends BaseThread {
                     log.info("无详情解析任务");
                 } else {
                     log.info("开始执行详情解析任务");
-                    ExpandSpider.create(new DetailsSingleProcessor(task), new JedisPool(redisConfigVo.getHostName()))
+                    ExpandSpider.create(new DetailsSingleProcessor(), new JedisPool(redisConfigVo.getHostName()))
                             .setScheduler(new ResourceTaskScheduler())
-                            .setStartRequest(task.getUrl())
+                            .setStartRequest(task.getUrl(),task)
                             .setPipeline(new ConsolePipeline())
                             .run();
                 }

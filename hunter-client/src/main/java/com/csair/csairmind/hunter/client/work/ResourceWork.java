@@ -51,9 +51,9 @@ public class ResourceWork extends BaseThread {
                     log.info("无资源解析任务");
                 } else {
                     log.info("开始执行资源解析任务");
-                    ExpandSpider.create(new ResourcesProcessor(task), new JedisPool(redisConfigVo.getHostName()))
+                    ExpandSpider.create(new ResourcesProcessor(), new JedisPool(redisConfigVo.getHostName()))
                             .setScheduler(new ResourceTaskScheduler())
-                            .setStartRequest(task.getUrl())
+                            .setStartRequest(task.getUrl(),task)
                             .setDistinct(DistinctFactory.getInstance(task.getDistinct_type()))
                             .run();
                 }

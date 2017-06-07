@@ -2,17 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a61c5caf-aa17-4b59-adb1-307931feb46a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/util/BeanToMapUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/vo/SingleDataVo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hunter-service/src/main/java/com/csair/csairmind/hunter/service/request/SpriderTestRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hunter-service/src/main/java/com/csair/csairmind/hunter/service/response/SpriderTestResponse.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hunter-service/src/main/java/com/csair/csairmind/hunter/service/result/ResultData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hunter-service/src/main/resources/application.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/pipeline/SpriderTestPipeline.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/processor/currency/HunterPageProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/schedule/TestTaskScheduler.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hunter-common/target/classes/com/csair/csairmind/hunter/common/vo/ResourceTask.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/downLoad/HttpTools.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-sprider/target/classes/com/csair/csairmind/hunter/spider/ExpandSpider.class" afterPath="$PROJECT_DIR$/hunter-sprider/target/classes/com/csair/csairmind/hunter/spider/ExpandSpider.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-sprider/target/classes/com/csair/csairmind/hunter/spider/processor/currency/ResourcesProcessor.class" afterPath="$PROJECT_DIR$/hunter-sprider/target/classes/com/csair/csairmind/hunter/spider/processor/currency/ResourcesProcessor.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-sprider/target/test-classes/SpriderTest$1.class" afterPath="$PROJECT_DIR$/hunter-sprider/target/test-classes/SpriderTest$1.class" />
@@ -21,22 +10,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/DetailsWork.java" afterPath="$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/DetailsWork.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/ResourceWork.java" afterPath="$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/ResourceWork.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/response/DetalisTaskResponse.java" afterPath="$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/response/DetalisTaskResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/response/ResourceTaskResponse.java" afterPath="$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/response/ResourceTaskResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-master/src/main/java/com/csair/csairmind/hunter/master/service/DetalisTaskService.java" afterPath="$PROJECT_DIR$/hunter-master/src/main/java/com/csair/csairmind/hunter/master/service/DetalisTaskService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-master/src/main/java/com/csair/csairmind/hunter/master/service/ResourceTaskService.java" afterPath="$PROJECT_DIR$/hunter-master/src/main/java/com/csair/csairmind/hunter/master/service/ResourceTaskService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-master/src/test/java/ProperTest.java" afterPath="$PROJECT_DIR$/hunter-master/src/test/java/ProperTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-service/hunter-service.iml" afterPath="$PROJECT_DIR$/hunter-service/hunter-service.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-service/pom.xml" afterPath="$PROJECT_DIR$/hunter-service/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-service/src/main/java/com/csair/csairmind/hunter/service/api/SpriderTaskService.java" afterPath="$PROJECT_DIR$/hunter-service/src/main/java/com/csair/csairmind/hunter/service/api/SpriderTaskService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/ExpandSpider.java" afterPath="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/ExpandSpider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/processor/currency/DetailsListProcessor.java" afterPath="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/processor/currency/DetailsListProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/processor/currency/DetailsSingleProcessor.java" afterPath="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/processor/currency/DetailsSingleProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/processor/currency/ResourcesProcessor.java" afterPath="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/processor/currency/ResourcesProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-sprider/src/test/java/SpriderTest.java" afterPath="$PROJECT_DIR$/hunter-sprider/src/test/java/SpriderTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunter-sprider/src/test/java/processor/SinaPageProcessor.java" afterPath="$PROJECT_DIR$/hunter-sprider/src/test/java/processor/SinaPageProcessor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/vo/DetailsTask.java" afterPath="$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/vo/DetailsRule.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/vo/ResourceTask.java" afterPath="$PROJECT_DIR$/hunter-common/src/main/java/com/csair/csairmind/hunter/common/vo/ResourceRule.java" />
     </list>
     <ignored path="$PROJECT_DIR$/hunter-client/target/" />
     <ignored path="$PROJECT_DIR$/hunter-common/target/" />
@@ -69,7 +42,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SpriderTaskService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SpriderTaskService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hunter-service/src/main/java/com/csair/csairmind/hunter/service/api/SpriderTaskService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-34">
@@ -77,6 +50,26 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DetailsWork.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/DetailsWork.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="446">
+              <caret line="52" column="35" lean-forward="true" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResourceWork.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/ResourceWork.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="55" column="63" lean-forward="false" selection-start-line="55" selection-start-column="63" selection-end-line="55" selection-end-column="63" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -117,22 +110,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpriderTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hunter-sprider/src/test/java/SpriderTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2268">
-              <caret line="109" column="63" lean-forward="false" selection-start-line="109" selection-start-column="63" selection-end-line="109" selection-end-column="77" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SinaPageProcessor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hunter-sprider/src/test/java/processor/SinaPageProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
               <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1025#1026#0" expanded="false" />
+                <element signature="e#1052#1053#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -167,16 +154,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResourcesProcessor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/processor/currency/ResourcesProcessor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1431">
-              <caret line="69" column="14" lean-forward="false" selection-start-line="69" selection-start-column="14" selection-end-line="69" selection-end-column="14" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -256,8 +233,6 @@
         <option value="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/distinct/UrlDistinct.java" />
         <option value="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/factory/RedisFactory.java" />
         <option value="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/schedule/ResourceTaskScheduler.java" />
-        <option value="$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/ResourceWork.java" />
-        <option value="$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/DetailsWork.java" />
         <option value="$PROJECT_DIR$/hunter-service/src/main/java/com/csair/csairmind/hunter/service/request/AddUserRequest.java" />
         <option value="$PROJECT_DIR$/hunter-service/src/main/java/com/csair/csairmind/hunter/service/request/SriderTestRequest.java" />
         <option value="$PROJECT_DIR$/hunter-service/src/main/java/com/csair/csairmind/hunter/service/result/ResultData.java" />
@@ -278,6 +253,8 @@
         <option value="$PROJECT_DIR$/hunter-service/src/main/java/com/csair/csairmind/hunter/service/response/SpriderTestResponse.java" />
         <option value="$PROJECT_DIR$/hunter-sprider/src/main/java/com/csair/csairmind/hunter/spider/pipeline/SpriderTestPipeline.java" />
         <option value="$PROJECT_DIR$/hunter-service/src/main/java/com/csair/csairmind/hunter/service/api/SpriderTaskService.java" />
+        <option value="$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/DetailsWork.java" />
+        <option value="$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/ResourceWork.java" />
       </list>
     </option>
   </component>
@@ -943,6 +920,124 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunter-client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="work" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -1560,7 +1655,7 @@
       <workItem from="1496623445900" duration="10120000" />
       <workItem from="1496641600168" duration="21102000" />
       <workItem from="1496816078835" duration="10645000" />
-      <workItem from="1496834159794" duration="63000" />
+      <workItem from="1496834159794" duration="134000" />
     </task>
     <task id="LOCAL-00001" summary="是是">
       <created>1495526475050</created>
@@ -1667,7 +1762,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496652755690</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="新增爬虫任务测试接口，修改爬虫页面解析规则">
+      <created>1496834265964</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1496834265964</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1703,7 +1805,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205620000" />
+    <option name="totallyTimeSpent" value="205691000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="0" />
@@ -1729,7 +1831,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.51955307" sideWeight="0.49713466" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2821229" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25071633" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25071633" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1793,7 +1895,8 @@
     <MESSAGE value="完善爬出任务调度模块" />
     <MESSAGE value="爬虫模块集成到客户端" />
     <MESSAGE value="优化redis连接方式" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化redis连接方式" />
+    <MESSAGE value="新增爬虫任务测试接口，修改爬虫页面解析规则" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增爬虫任务测试接口，修改爬虫页面解析规则" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1886,6 +1989,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1539">
           <caret line="68" column="5" lean-forward="false" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1893,20 +1997,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/ResourceWork.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="23" column="11" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/DetailsWork.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1215">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1064#1065#0" expanded="false" />
+            <element signature="e#1094#1095#0" expanded="false" />
+            <element signature="e#1141#1142#0" expanded="false" />
+            <element signature="e#1179#1180#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1949,6 +2046,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="407">
           <caret line="27" column="9" lean-forward="false" selection-start-line="22" selection-start-column="7" selection-end-line="27" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2033,6 +2131,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="392">
           <caret line="21" column="51" lean-forward="false" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2059,6 +2158,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="545">
           <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2088,6 +2188,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2109,6 +2210,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="11" column="9" lean-forward="false" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2166,7 +2270,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1025#1026#0" expanded="false" />
+            <element signature="e#1052#1053#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2215,6 +2323,22 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/DetailsWork.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="52" column="35" lean-forward="true" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hunter-client/src/main/java/com/csair/csairmind/hunter/client/work/ResourceWork.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="55" column="63" lean-forward="false" selection-start-line="55" selection-start-column="63" selection-end-line="55" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
