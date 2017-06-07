@@ -13,7 +13,7 @@ import java.util.Map;
  */
 @Data
 @ToString
-public class ResourceTask implements Serializable {
+public class ResourceRule implements Serializable {
     //详情URL表达式
     private String details_url_reg;
 

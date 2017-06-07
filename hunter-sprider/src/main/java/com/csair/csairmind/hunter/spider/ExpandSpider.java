@@ -9,6 +9,7 @@ import com.csair.csairmind.hunter.spider.exception.NoGetReadyException;
 import com.csair.csairmind.hunter.spider.factory.RedisFactory;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsListProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
+import com.csair.csairmind.hunter.spider.processor.currency.HunterPageProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.ResourcesProcessor;
 import com.csair.csairmind.hunter.spider.schedule.DistinctScheduler;
 import lombok.extern.slf4j.Slf4j;
@@ -31,35 +32,47 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by zhangcheng on 2017/5/23 0023.
+ * Created by zhangcheng
+ * 爬虫启动类
  */
 @Slf4j
 public class ExpandSpider implements Task, Runnable {
 
+    //网页下载方式
     private Downloader downloader;
+    //数据持久化方式
     private List<Pipeline> pipelines = new ArrayList();
-    private PageProcessor pageProcessor;
-    private List<Request> startRequests;
+    //网页处理方式
+    private HunterPageProcessor pageProcessor;
+    //请求参数设置
     private Site site;
     private String uuid;
+    //资源调度
     private DistinctScheduler scheduler;
     private int threadNum = 1;
     private AtomicInteger stat = new AtomicInteger(0);
     private boolean spawnUrl = true;
-    private Request startRequest;
+    private boolean spawnDistinct = true;
+    //起始请求集合
+    private Map<Request, Object> startRequestMap = new HashMap<Request, Object>();
+    //去重方式
     private Distinct distinct;
+    //超时时长
     private Integer timeOut = 15000;
-    //任务类型，解析任务或者详情任务
 
-    public static ExpandSpider create(PageProcessor pageProcessor, JedisPool pool) {
+
+    public static ExpandSpider create(HunterPageProcessor pageProcessor) {
+        return new ExpandSpider(pageProcessor, null);
+    }
+
+    public static ExpandSpider create(HunterPageProcessor pageProcessor, JedisPool pool) {
         return new ExpandSpider(pageProcessor, pool);
     }
 
-    public ExpandSpider(PageProcessor pageProcessor, JedisPool pool) {
+    public ExpandSpider(HunterPageProcessor pageProcessor, JedisPool pool) {
         RedisFactory.init(pool);
         this.pageProcessor = pageProcessor;
         this.site = pageProcessor.getSite();
-        this.startRequests = pageProcessor.getSite().getStartRequests();
     }
 
     @Override
@@ -68,16 +81,16 @@ public class ExpandSpider implements Task, Runnable {
             this.checkRunningStat();//检查组件是否齐全
             this.initComponent();//检查默认组件
             log.info("Spider " + this.getUUID() + " started!");
-            if (startRequest != null) {
+            for (Request request : startRequestMap.keySet()) {
                 if (pageProcessor instanceof ResourcesProcessor)//解析任务处理
-                    this.processResourceRequest(startRequest);
+                    this.processResourceRequest(request, startRequestMap.get(request));
                 else if (pageProcessor instanceof DetailsSingleProcessor)//详情单条任务处理
-                    this.processDetailsSingleRequest(startRequest);
+                    this.processDetailsSingleRequest(request, startRequestMap.get(request));
                 else if (pageProcessor instanceof DetailsListProcessor)//详情List任务处理
-                    this.processDetailsListRequest(startRequest);
+                    this.processDetailsListRequest(request, startRequestMap.get(request));
             }
         } catch (Exception var5) {
-            log.error("执行爬虫出错",var5);
+            log.error("执行爬虫出错", var5);
         } finally {
             this.close();
         }
@@ -88,13 +101,13 @@ public class ExpandSpider implements Task, Runnable {
      * 资源解析任务处理
      * @param request
      */
-    protected void processResourceRequest(Request request) {
+    protected void processResourceRequest(Request request, Object rule) {
         Page page = this.downloader.download(request, this);
         if (page == null) {
         } else if (page.isNeedCycleRetry()) {
             this.extractAndAddRequests(page, true);
         } else {
-            this.pageProcessor.process(page);
+            this.pageProcessor.process(page, rule);
             this.extractAndAddRequests(page, this.spawnUrl);
         }
     }
@@ -103,11 +116,11 @@ public class ExpandSpider implements Task, Runnable {
      * 解析单条详情任务处理
      * @param request
      */
-    protected void processDetailsSingleRequest(Request request) {
+    protected void processDetailsSingleRequest(Request request, Object rule) {
         Page page = this.downloader.download(request, this);
         if (page == null) {
         } else {
-            this.pageProcessor.process(page);
+            this.pageProcessor.process(page, rule);
             if (!page.getResultItems().isSkip()) {
                 Iterator var3 = this.pipelines.iterator();
                 while (var3.hasNext()) {
@@ -115,7 +128,8 @@ public class ExpandSpider implements Task, Runnable {
                     pipeline.process(page.getResultItems(), this);
                 }
             }
-            this.scheduler.pushDistinctQueue(request.getUrl());//任务完成，保存去重信息
+            if (spawnDistinct)
+                this.scheduler.pushDistinctQueue(request.getUrl());//任务完成，保存去重信息
         }
     }
 
@@ -123,11 +137,11 @@ public class ExpandSpider implements Task, Runnable {
      * 解析列表详情任务处理
      * @param request
      */
-    protected void processDetailsListRequest(Request request) {
+    protected void processDetailsListRequest(Request request, Object rule) {
         Page page = this.downloader.download(request, this);
         if (page == null) {
         } else {
-            this.pageProcessor.process(page);
+            this.pageProcessor.process(page, rule);
             if (!page.getResultItems().isSkip()) {
                 List<Map<String, Object>> data_list = page.getResultItems().get(DataConstants.DATA_LIEST);
                 Iterator var3 = this.pipelines.iterator();
@@ -148,7 +162,8 @@ public class ExpandSpider implements Task, Runnable {
                         Pipeline pipeline = (Pipeline) var3.next();
                         pipeline.process(page.getResultItems(), this);
                     }
-                    this.scheduler.pushDistinctQueue(distinctCode);//任务完成，保存去重信息
+                    if (spawnDistinct)
+                        this.scheduler.pushDistinctQueue(distinctCode);//任务完成，保存去重信息
                 }
             }
 
@@ -196,7 +211,7 @@ public class ExpandSpider implements Task, Runnable {
      * 检查爬虫是否准备就绪
      */
     private void checkRunningStat() throws NoGetReadyException {
-        if (startRequest == null)
+        if (startRequestMap.size() == 0)
             throw new NoGetReadyException("初始请求未设置");
 //        else if (scheduler == null)
 //            throw new NoGetReadyException("资源调度器未设置");
@@ -283,17 +298,17 @@ public class ExpandSpider implements Task, Runnable {
         return this;
     }
 
-    public Request getStartRequest() {
-        return startRequest;
+    public Map<Request, Object> getStartRequest() {
+        return startRequestMap;
     }
 
-    public ExpandSpider setStartRequest(String requestString) {
-        this.startRequest = new Request(requestString);
+    public ExpandSpider setStartRequest(String requestString, Object rule) {
+        this.startRequestMap.put(new Request(requestString), rule);
         return this;
     }
 
-    public ExpandSpider setStartRequest(Request startRequest) {
-        this.startRequest = startRequest;
+    public ExpandSpider setStartRequest(Request startRequest, Object rule) {
+        this.startRequestMap.put(startRequest, rule);
         return this;
     }
 
@@ -311,4 +326,10 @@ public class ExpandSpider implements Task, Runnable {
         this.timeOut = timeOut;
         return this;
     }
+
+    public ExpandSpider setSpawnDistinct(boolean spawnDistinct) {
+        this.spawnDistinct = spawnDistinct;
+        return this;
+    }
+
 }

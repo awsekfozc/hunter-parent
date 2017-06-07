@@ -10,7 +10,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 /**
- * Created by zhangcheng on 17/4/18.
+ * Created by zhangcheng
  */
 public class SinaPageProcessor implements PageProcessor {
 
@@ -24,7 +24,7 @@ public class SinaPageProcessor implements PageProcessor {
         List<String> urls = page.getHtml().xpath("//div[@class=\"r-info r-info2\"]").links().all();
         for (String url : urls)
             System.out.println(url);
-        page.addTargetRequests(urls);
+//        page.addTargetRequests(urls);
     }
 
     public SinaPageProcessor() throws Exception {

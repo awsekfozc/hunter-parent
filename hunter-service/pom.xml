@@ -15,6 +15,16 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>com.csair.csairmind.hunter</groupId>
+            <artifactId>hunter-sprider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.csair.csairmind.hunter</groupId>
+            <artifactId>hunter-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>${swagger.version}</version>

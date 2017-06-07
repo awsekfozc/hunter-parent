@@ -1,6 +1,6 @@
 package com.csair.csairmind.hunter.common.response;
 
-import com.csair.csairmind.hunter.common.vo.ResourceTask;
+import com.csair.csairmind.hunter.common.vo.ResourceRule;
 import lombok.Data;
 
 /**
@@ -9,5 +9,5 @@ import lombok.Data;
  */
 @Data
 public class ResourceTaskResponse extends ApiResponse {
-    private ResourceTask task;
+    private ResourceRule task;
 }

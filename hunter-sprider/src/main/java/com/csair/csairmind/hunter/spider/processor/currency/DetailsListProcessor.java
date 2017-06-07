@@ -1,16 +1,13 @@
 package com.csair.csairmind.hunter.spider.processor.currency;
 
 import com.csair.csairmind.hunter.common.constant.DataConstants;
-import com.csair.csairmind.hunter.common.enums.SpriderEnums;
-import com.csair.csairmind.hunter.common.util.ContentUtils;
-import com.csair.csairmind.hunter.common.vo.DetailsTask;
+import com.csair.csairmind.hunter.common.vo.DetailsRule;
 import com.csair.csairmind.hunter.spider.site.ExpandSite;
 import lombok.Data;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
-import us.codecraft.webmagic.processor.PageProcessor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,21 +19,17 @@ import java.util.Map;
  * 详情解析任务处理器---列表详情类型
  */
 @Data
-public class DetailsListProcessor implements PageProcessor {
+public class DetailsListProcessor implements HunterPageProcessor {
 
-    private DetailsTask task;
+    private DetailsRule task;
 
     private Site site = ExpandSite.me();
 
     private List<Map<String,Object>> dataList = new ArrayList<>();
 
-    public DetailsListProcessor(DetailsTask task) {
-        this.task = task;
-    }
-
-
     @Override
-    public void process(Page page) {
+    public void process(Page page,Object rule) {
+        this.setTask((DetailsRule)rule);
         List<String> titles = page.getHtml().xpath(task.getTitle_extract_rule()).all();
         List<String> dates = page.getHtml().xpath(task.getDate_extract_rule()).all();
         List<String> contents = page.getHtml().xpath(task.getContent_extract_rule()).all();

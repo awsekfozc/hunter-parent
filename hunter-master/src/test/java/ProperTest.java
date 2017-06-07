@@ -1,7 +1,6 @@
 import com.alibaba.fastjson.JSON;
 import com.csair.csairmind.hunter.common.constant.SprderConstants;
 import com.csair.csairmind.hunter.common.plug.RedisServiceImpl;
-import com.csair.csairmind.hunter.common.vo.ResourceTask;
 import com.csair.csairmind.hunter.master.Bootstrap;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,9 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.HashMap;
 import java.util.Map;

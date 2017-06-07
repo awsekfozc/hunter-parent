@@ -8,7 +8,7 @@ import com.csair.csairmind.hunter.common.plug.RedisServiceImpl;
 import com.csair.csairmind.hunter.common.request.ApiRequest;
 import com.csair.csairmind.hunter.common.response.ApiResponse;
 import com.csair.csairmind.hunter.common.response.ResourceTaskResponse;
-import com.csair.csairmind.hunter.common.vo.ResourceTask;
+import com.csair.csairmind.hunter.common.vo.ResourceRule;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,11 +29,11 @@ public class ResourceTaskService extends BasicApiService {
     @Override
     public ApiResponse execute(ApiRequest request) {
         String machineId = getApiContext().getMachineId();
-        ResourceTask task = null;
+        ResourceRule task = null;
 
         //客户端机器在线
         if (redisServiceImpl.hexists(MACHINE_QUEUE_PREFIX, machineId)) {
-            task = JSON.parseObject(redisServiceImpl.lpop(R_RESOURCE_TASK), ResourceTask.class);
+            task = JSON.parseObject(redisServiceImpl.lpop(R_RESOURCE_TASK), ResourceRule.class);
         }
         ResourceTaskResponse response = new ResourceTaskResponse();
         response.setOperateCodeHolder(RESOURCE_TASK_SUCCESS);

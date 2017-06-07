@@ -1,6 +1,7 @@
 package com.csair.csairmind.hunter.spider.processor.currency;
 
-import com.csair.csairmind.hunter.common.vo.ResourceTask;
+import com.csair.csairmind.hunter.common.vo.DetailsRule;
+import com.csair.csairmind.hunter.common.vo.ResourceRule;
 import com.csair.csairmind.hunter.spider.site.ExpandSite;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -23,17 +24,14 @@ import java.util.regex.Pattern;
  */
 @Data
 @Slf4j
-public class ResourcesProcessor implements PageProcessor {
+public class ResourcesProcessor implements HunterPageProcessor {
 
     private Site site = ExpandSite.me();
 
-    private ResourceTask task;
+    private ResourceRule task;
 
-    public ResourcesProcessor(ResourceTask task) {
-        this.task = task;
-    }
-
-    public void process(Page page) {
+    public void process(Page page,Object rule) {
+        this.setTask((ResourceRule)rule);
         List<String> urls;
         try {
             if (StringUtils.isNotBlank(task.getDetails_url_reg())) {

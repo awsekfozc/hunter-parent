@@ -1,9 +1,8 @@
 package com.csair.csairmind.hunter.spider.processor.currency;
 
 import com.csair.csairmind.hunter.common.constant.DataConstants;
-import com.csair.csairmind.hunter.common.enums.SpriderEnums;
 import com.csair.csairmind.hunter.common.util.ContentUtils;
-import com.csair.csairmind.hunter.common.vo.DetailsTask;
+import com.csair.csairmind.hunter.common.vo.DetailsRule;
 import com.csair.csairmind.hunter.spider.site.ExpandSite;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -16,18 +15,15 @@ import us.codecraft.webmagic.processor.PageProcessor;
  * 详情解析任务处理器---单条详情类型
  */
 @Data
-public class DetailsSingleProcessor implements PageProcessor {
+public class DetailsSingleProcessor implements HunterPageProcessor {
 
-    private DetailsTask task;
+    private DetailsRule task;
 
     private Site site = ExpandSite.me();
 
-    public DetailsSingleProcessor(DetailsTask task) {
-        this.task = task;
-    }
-
     @Override
-    public void process(Page page) {
+    public void process(Page page,Object rule) {
+        this.setTask((DetailsRule)rule);
         page.putField(DataConstants.TITLE, page.getHtml().xpath(task.getTitle_extract_rule()));
         page.putField(DataConstants.DATE_TIME, page.getHtml().xpath(task.getDate_extract_rule()));
         page.putField(DataConstants.CONTENT, ContentUtils.removeUrlContent(page.getHtml().xpath(task.getContent_extract_rule()).get()));
@@ -38,5 +34,4 @@ public class DetailsSingleProcessor implements PageProcessor {
             page.putField(DataConstants.DATA_URL, page.getHtml().xpath(task.getSource_extract_rule()));
 
     }
-
 }

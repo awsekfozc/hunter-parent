@@ -1,12 +1,11 @@
 package com.csair.csairmind.hunter.client.work;
 
-import com.csair.csairmind.hunter.client.content.DefaultApplicationContext;
 import com.csair.csairmind.hunter.common.config.RedisConfigVo;
 import com.csair.csairmind.hunter.common.request.DetalisTaskRequest;
 import com.csair.csairmind.hunter.common.request.OperateResult;
 import com.csair.csairmind.hunter.common.response.ApiResponse;
 import com.csair.csairmind.hunter.common.response.DetalisTaskResponse;
-import com.csair.csairmind.hunter.common.vo.DetailsTask;
+import com.csair.csairmind.hunter.common.vo.DetailsRule;
 import com.csair.csairmind.hunter.spider.ExpandSpider;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
 import com.csair.csairmind.hunter.spider.schedule.ResourceTaskScheduler;
@@ -21,6 +20,7 @@ import static com.csair.csairmind.hunter.common.enums.OperateCodeHolder.DETALIS_
 
 /**
  * Created by zhangcheng
+ * 详情解析任务工作
  */
 @Slf4j
 @Component
@@ -41,7 +41,7 @@ public class DetailsWork extends BaseThread {
             } else {
                 ApiResponse response = result.getResponse();
                 DetalisTaskResponse rsp = (DetalisTaskResponse) response;
-                DetailsTask task = rsp.getTask();
+                DetailsRule task = rsp.getTask();
                 if (task == null) {
                     log.info("无详情解析任务");
                 } else {

@@ -1,7 +1,6 @@
 package com.csair.csairmind.hunter.common.response;
 
-import com.csair.csairmind.hunter.common.vo.DetailsTask;
-import com.csair.csairmind.hunter.common.vo.ResourceTask;
+import com.csair.csairmind.hunter.common.vo.DetailsRule;
 import lombok.Data;
 
 /**
@@ -10,5 +9,5 @@ import lombok.Data;
  */
 @Data
 public class DetalisTaskResponse extends ApiResponse {
-    private DetailsTask task;
+    private DetailsRule task;
 }

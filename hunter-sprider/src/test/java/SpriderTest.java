@@ -1,7 +1,7 @@
 import com.alibaba.fastjson.JSON;
 import com.csair.csairmind.hunter.common.constant.SprderConstants;
-import com.csair.csairmind.hunter.common.vo.DetailsTask;
-import com.csair.csairmind.hunter.common.vo.ResourceTask;
+import com.csair.csairmind.hunter.common.vo.DetailsRule;
+import com.csair.csairmind.hunter.common.vo.ResourceRule;
 import com.csair.csairmind.hunter.spider.ExpandSpider;
 import com.csair.csairmind.hunter.spider.distinct.ContentDistinct;
 import com.csair.csairmind.hunter.spider.factory.DistinctFactory;
@@ -23,7 +23,6 @@ import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,7 +52,7 @@ public class SpriderTest {
 //        resource_taskRule.put("details_url_reg", "");
 //        resource_taskRule.put("details_url_jpath", "");
 
-          //2.1.1.7中国民航局
+        //2.1.1.7中国民航局
 //        resource_taskRule.put("url", "http://www.caac.gov.cn/XWZX/DFDT/index_1.html");
 //        resource_taskRule.put("details_url_xpath", "");
 //        resource_taskRule.put("details_url_reg", "http://www.caac.gov.cn/XWZX/DFDT/(\\d+)/t(\\w+).html");
@@ -100,13 +99,31 @@ public class SpriderTest {
 
     @Test
     public void testResourceProcessor() {
-        Jedis jedis = pool.getResource();
-        jedis.lpush(SprderConstants.R_RESOURCE_TASK, JSON.toJSONString(resource_taskRule));
-        ResourceTask task = JSON.parseObject(jedis.lpop(SprderConstants.R_RESOURCE_TASK), ResourceTask.class);
-        System.out.println(task);
-        ExpandSpider.create(new ResourcesProcessor(task), pool)
+//        Jedis jedis = pool.getResource();
+//        jedis.lpush(SprderConstants.R_RESOURCE_TASK, JSON.toJSONString(resource_taskRule));
+        String ruleStr = "{\n" +
+                "    \"content_extract_rule\": \"//*[@id=\\\"artibody\\\"]/tidyText()\",\n" +
+                "    \"data_source\": \"新浪网\",\n" +
+                "    \"date_extract_rule\": \"//*[@id=\\\"wrapOuter\\\"]/div/div[4]/span/text()\\t\",\n" +
+                "    \"details_url_jpath\": \"\",\n" +
+                "    \"details_url_reg\": \"\",\n" +
+                "    \"details_url_xpath\": \"//div[@class=\\\"r-info r-info2\\\"]\",\n" +
+                "    \"distinct_type\": \"1\",\n" +
+                "    \"increment_rule\": 60000,\n" +
+                "    \"max_page_size\": \"50\",\n" +
+                "    \"page_reg\": \"http://search.sina.com.cn/?q=%s&range=all&c=news&sort=time&col=&source=&from=&country=&size=&time=&a=&page=%d&pf=2131425470&ps=2134309112&dpc=1\",\n" +
+                "    \"request_time\": \"2017-06-05 15:10:33\",\n" +
+                "    \"search_wrods\": \"南航,航空,南方航空\",\n" +
+                "    \"source_extract_rule\": \"\",\n" +
+                "    \"task_id\": \"10002\",\n" +
+                "    \"task_type\": \"1\",\n" +
+                "    \"title_extract_rule\": \"//*[@id=\\\"artibodyTitle\\\"]/text()\\t\",\n" +
+                "    \"url\": \"http://search.sina.com.cn/?q=%C4%CF%BA%BD&range=all&c=news&sort=time\"\n" +
+                "}";
+        ResourceRule task = JSON.parseObject(ruleStr, ResourceRule.class);
+        ExpandSpider.create(new ResourcesProcessor(), pool)
                 .setScheduler(new ResourceTaskScheduler())
-                .setStartRequest(task.getUrl())
+                .setStartRequest(task.getUrl(), task)
                 .setDistinct(DistinctFactory.getInstance(task.getDistinct_type()))
                 .run();
     }
@@ -114,17 +131,17 @@ public class SpriderTest {
     @Test
     public void testDetailsSingleProcessor() {
         Jedis jedis = pool.getResource();
-        DetailsTask task = JSON.parseObject(jedis.hget(SprderConstants.R_DETAILS_TASK, jedis.lpop(SprderConstants.R_DETAILS_TASK_KEY)), DetailsTask.class);
+        DetailsRule task = JSON.parseObject(jedis.hget(SprderConstants.R_DETAILS_TASK, jedis.lpop(SprderConstants.R_DETAILS_TASK_KEY)), DetailsRule.class);
         System.out.println(task);
-        ExpandSpider.create(new DetailsSingleProcessor(task), pool)
+        ExpandSpider.create(new DetailsSingleProcessor(), pool)
                 .setScheduler(new ResourceTaskScheduler())
-                .setStartRequest(task.getUrl())
+                .setStartRequest(task.getUrl(), task)
                 .setPipeline(new ConsolePipeline())
                 .run();
     }
 
     @Test
-    public void testDetailsListProcessor(){
+    public void testDetailsListProcessor() {
         //2.1.1.3民航资源网-用户评论
         resource_taskRule.put("url", "https://www.capse.net/sound/comments");
         resource_taskRule.put("details_url_xpath", "");
@@ -139,10 +156,10 @@ public class SpriderTest {
         resource_taskRule.put("task_type", 2);
         Jedis jedis = pool.getResource();
         jedis.lpush(SprderConstants.R_RESOURCE_TASK, JSON.toJSONString(resource_taskRule));
-        DetailsTask task = JSON.parseObject(jedis.lpop(SprderConstants.R_RESOURCE_TASK), DetailsTask.class);
+        DetailsRule task = JSON.parseObject(jedis.lpop(SprderConstants.R_RESOURCE_TASK), DetailsRule.class);
         System.out.println(task);
-        ExpandSpider.create(new DetailsListProcessor(task), pool)
-                .setStartRequest(task.getUrl())
+        ExpandSpider.create(new DetailsListProcessor(), pool)
+                .setStartRequest(task.getUrl(), task)
                 .setDistinct(new ContentDistinct())
                 .setPipeline(new ConsolePipeline())
                 .run();
@@ -157,24 +174,24 @@ public class SpriderTest {
 
             public Site getSite() {
                 return Site.me()
-                        .setHttpProxy(new HttpHost("proxy.abuyun.com",9020))
-                        .setUsernamePasswordCredentials(new UsernamePasswordCredentials("H9142YEPE0R727DD","B96781AC19AC1926"))
-                        .addHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36")
-                        .addHeader("Cookie","Hm_lvt_a5257df898f02b3e0889ce42109b2628=1492999687,1493023645,1493024323,1493861217; _ga=GA1.2.1820557420.1492743250; XSRF-TOKEN=eyJpdiI6InVjUnFHQzdINDNLMU1qMW1LWnpwZ2c9PSIsInZhbHVlIjoialplMHBxbWlYRVwvMWhWZmZhM1F3VVk5WDJoUEx5V2l2Nk1pRlwvbURHWFVzQ1NBWmpHZUlVWURKeW5iamRNV2hCbG5Zb2ltZDdFVzlDYUpubCsrVjEyQT09IiwibWFjIjoiNjQxMDlhMTIzNGYxMzRlMzk3ZTc5ZDY3ZTM3MzZlN2E3YzEzMDNkOGMzMjY0ZTIxMGRkMGMzMjFhNjE0MGI5OCJ9; laravel_session=eyJpdiI6IjZGTVwvekRRdmJTOU5iUldrUTF0S1dnPT0iLCJ2YWx1ZSI6Ik55R2NVYjM4R2pcL0U0bWNTVGp4Z2lQT1wvXC8xdTZtU3VOQmVLaTdaR1JCRURoMTRiM2tNRHNOMXlNNnNqSUJGbFhMa2pHNmVrYzQ5dk9QZXl2dEFaQVRRPT0iLCJtYWMiOiI1ZmJjYjdjMDFmNjQxM2UzZDNiNjhhMTE1MTI3ZDFhMDMyZDU3Y2U0OWVkMDI0MmNmZWNlZmQ2MWNmNTZjNzRhIn0%3D")
-                        .addHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                        .setHttpProxy(new HttpHost("proxy.abuyun.com", 9020))
+                        .setUsernamePasswordCredentials(new UsernamePasswordCredentials("H9142YEPE0R727DD", "B96781AC19AC1926"))
+                        .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36")
+                        .addHeader("Cookie", "Hm_lvt_a5257df898f02b3e0889ce42109b2628=1492999687,1493023645,1493024323,1493861217; _ga=GA1.2.1820557420.1492743250; XSRF-TOKEN=eyJpdiI6InVjUnFHQzdINDNLMU1qMW1LWnpwZ2c9PSIsInZhbHVlIjoialplMHBxbWlYRVwvMWhWZmZhM1F3VVk5WDJoUEx5V2l2Nk1pRlwvbURHWFVzQ1NBWmpHZUlVWURKeW5iamRNV2hCbG5Zb2ltZDdFVzlDYUpubCsrVjEyQT09IiwibWFjIjoiNjQxMDlhMTIzNGYxMzRlMzk3ZTc5ZDY3ZTM3MzZlN2E3YzEzMDNkOGMzMjY0ZTIxMGRkMGMzMjFhNjE0MGI5OCJ9; laravel_session=eyJpdiI6IjZGTVwvekRRdmJTOU5iUldrUTF0S1dnPT0iLCJ2YWx1ZSI6Ik55R2NVYjM4R2pcL0U0bWNTVGp4Z2lQT1wvXC8xdTZtU3VOQmVLaTdaR1JCRURoMTRiM2tNRHNOMXlNNnNqSUJGbFhMa2pHNmVrYzQ5dk9QZXl2dEFaQVRRPT0iLCJtYWMiOiI1ZmJjYjdjMDFmNjQxM2UzZDNiNjhhMTE1MTI3ZDFhMDMyZDU3Y2U0OWVkMDI0MmNmZWNlZmQ2MWNmNTZjNzRhIn0%3D")
+                        .addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
             }
         });
         spider.test("https://www.capse.net/sound/comments?page=1&limit=20");
     }
 
     @Test
-    public void testResourceSingeTask(){
+    public void testResourceSingeTask() {
         String taskStr = "{\"content_extract_rule\":\"//*[@id=\\\"artibody\\\"]/tidyText()\",\"data_source\":\"新浪网\",\"date_extract_rule\":\"//*[@id=\\\"wrapOuter\\\"]/div/div[4]/span/text()\\t\",\"details_url_jpath\":\"\",\"details_url_reg\":\"\",\"details_url_xpath\":\"//*[@id=\\\"result\\\"]/div[4]\",\"distinct_type\":\"1\",\"increment_rule\":60000,\"max_page_size\":\"50\",\"page_reg\":\"http://search.sina.com.cn/?q=%s&range=all&c=news&sort=time&col=&source=&from=&country=&size=&time=&a=&page=%d&pf=2131425470&ps=2134309112&dpc=1\",\"request_time\":\"2017-06-05 15:02:46\",\"search_wrods\":\"南航,航空,南方航空\",\"source_extract_rule\":\"\",\"task_id\":\"10002\",\"task_type\":\"1\",\"title_extract_rule\":\"//*[@id=\\\"artibodyTitle\\\"]/text()\\t\",\"url\":\"http://search.sina.com.cn/?q=%C4%CF%BA%BD&range=all&c=news&sort=time&col=&source=&from=&country=&size=&time=&a=&page=1&pf=2131425470&ps=2134309112&dpc=1\"}\n";
-        ResourceTask task = JSON.parseObject(taskStr, ResourceTask.class);
+        ResourceRule task = JSON.parseObject(taskStr, ResourceRule.class);
         System.out.println(task);
-        ExpandSpider.create(new ResourcesProcessor(task), pool)
+        ExpandSpider.create(new ResourcesProcessor(), pool)
                 .setScheduler(new ResourceTaskScheduler())
-                .setStartRequest(task.getUrl())
+                .setStartRequest(task.getUrl(), task)
                 .setDistinct(DistinctFactory.getInstance(task.getDistinct_type()))
                 .run();
     }

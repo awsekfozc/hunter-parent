@@ -1,17 +1,14 @@
 package com.csair.csairmind.hunter.client.work;
 
-import com.csair.csairmind.hunter.client.api.DefaultApiClient;
-import com.csair.csairmind.hunter.client.content.DefaultApplicationContext;
 
 import static com.csair.csairmind.hunter.common.enums.OperateCodeHolder.RESOURCE_TASK_SUCCESS;
 
-import com.csair.csairmind.hunter.common.config.RedisConfig;
 import com.csair.csairmind.hunter.common.config.RedisConfigVo;
 import com.csair.csairmind.hunter.common.request.OperateResult;
 import com.csair.csairmind.hunter.common.request.ResourceTaskRequest;
 import com.csair.csairmind.hunter.common.response.ApiResponse;
 import com.csair.csairmind.hunter.common.response.ResourceTaskResponse;
-import com.csair.csairmind.hunter.common.vo.ResourceTask;
+import com.csair.csairmind.hunter.common.vo.ResourceRule;
 import com.csair.csairmind.hunter.spider.ExpandSpider;
 import com.csair.csairmind.hunter.spider.factory.DistinctFactory;
 import com.csair.csairmind.hunter.spider.processor.currency.ResourcesProcessor;
@@ -24,6 +21,7 @@ import redis.clients.jedis.JedisPool;
 
 /**
  * Created by zhangcheng
+ * 资源解析任务工作
  */
 @Slf4j
 @Component
@@ -48,7 +46,7 @@ public class ResourceWork extends BaseThread {
             } else {
                 ApiResponse response = result.getResponse();
                 ResourceTaskResponse rsp = (ResourceTaskResponse) response;
-                ResourceTask task = rsp.getTask();
+                ResourceRule task = rsp.getTask();
                 if (task == null) {
                     log.info("无资源解析任务");
                 } else {
