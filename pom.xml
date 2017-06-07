@@ -16,6 +16,7 @@
         <module>hunter-sprider</module>
         <module>hunter-service</module>
         <module>hunter-scheduler</module>
+        <module>hunter-plugin</module>
     </modules>
 
     <parent>

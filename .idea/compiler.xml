@@ -9,6 +9,7 @@
         <module name="hunter-client" />
         <module name="hunter-common" />
         <module name="hunter-master" />
+        <module name="hunter-plugin" />
         <module name="hunter-scheduler" />
         <module name="hunter-service" />
         <module name="hunter-sprider" />
@@ -19,6 +20,7 @@
       <module name="hunter-common" target="1.7" />
       <module name="hunter-master" target="1.7" />
       <module name="hunter-parent" target="1.7" />
+      <module name="hunter-plugin" target="1.7" />
       <module name="hunter-scheduler" target="1.7" />
       <module name="hunter-service" target="1.7" />
       <module name="hunter-sprider" target="1.7" />
