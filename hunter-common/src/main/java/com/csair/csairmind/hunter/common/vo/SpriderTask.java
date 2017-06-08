@@ -42,6 +42,11 @@ public class SpriderTask implements Serializable {
     private String search_wrods;
     //爬取的最大页数
     private String max_page_size;
+    //创建时间
+    private String create_time;
     //最近请求时间
     private String request_time;
+    //爬虫状态
+    private Integer task_status;
+
 }

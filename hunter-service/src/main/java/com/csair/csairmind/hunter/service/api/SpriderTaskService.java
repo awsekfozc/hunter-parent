@@ -1,11 +1,13 @@
 package com.csair.csairmind.hunter.service.api;
 
-import com.csair.csairmind.hunter.common.util.BeanToMapUtil;
+import com.alibaba.fastjson.JSON;
+import com.csair.csairmind.hunter.common.plug.IRedisService;
+import com.csair.csairmind.hunter.common.util.DateUtils;
 import com.csair.csairmind.hunter.common.vo.DetailsRule;
 import com.csair.csairmind.hunter.common.vo.ResourceRule;
-import com.csair.csairmind.hunter.common.vo.SingleDataVo;
+import com.csair.csairmind.hunter.common.vo.SpriderTask;
+import com.csair.csairmind.hunter.service.request.SpriderSubmitRequest;
 import com.csair.csairmind.hunter.service.request.SpriderTestRequest;
-import com.csair.csairmind.hunter.service.response.SpriderTestResponse;
 import com.csair.csairmind.hunter.service.result.ResultData;
 import com.csair.csairmind.hunter.spider.ExpandSpider;
 import com.csair.csairmind.hunter.spider.pipeline.SpriderTestPipeline;
@@ -17,16 +19,20 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
-import us.codecraft.webmagic.pipeline.ConsolePipeline;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static com.csair.csairmind.hunter.common.constant.SprderConstants.R_TASK_QUEUE;
+import static com.csair.csairmind.hunter.common.enums.SpriderEnums.TASK_STATUS_SOTP;
+import static com.csair.csairmind.hunter.common.enums.SpriderEnums.TASK_STATUS_START;
 
 /**
  * Created by zhangcheng
@@ -37,12 +43,14 @@ import java.util.Map;
 @RequestMapping(value = "/sprider")
 public class SpriderTaskService {
 
+    @Autowired
+    IRedisService redisServiceImpl;
     @Value("${max_test_size}")
     private int max_test_size;
 
     @ApiOperation(value = "测试爬虫任务")
-    @PostMapping("/testSprider")
-    public ResultData<List<Map<String, Object>>> test(@Valid @RequestBody SpriderTestRequest spriderTestRequest, @RequestHeader HttpHeaders headers, HttpServletResponse httpServletResponse) {
+    @PostMapping("/test")
+    public ResultData<List<Map<String, Object>>> testSprider(@Valid @RequestBody SpriderTestRequest spriderTestRequest, @RequestHeader HttpHeaders headers, HttpServletResponse httpServletResponse) {
         ResourceRule task = new ResourceRule();
         List<Map<String, Object>> resultData = new ArrayList<>();
         try {
@@ -80,7 +88,23 @@ public class SpriderTaskService {
 
     @ApiOperation(value = "提交爬虫任务")
     @PostMapping("/submit")
-    public void taskSubmit(String sysCode, HttpServletResponse httpServletResponse) {
+    public ResultData taskSubmit(@Valid @RequestBody SpriderSubmitRequest request, HttpServletResponse httpServletResponse) {
+        SpriderTask task = new SpriderTask();
+        BeanUtils.copyProperties(request, task);
+        task.setTask_id("A" + System.currentTimeMillis());
+        task.setCreate_time(DateUtils.getDateTime());
+        task.setRequest_time(DateUtils.getDateTime());
+        task.setTask_status(TASK_STATUS_START.getCode());
+        redisServiceImpl.hset(R_TASK_QUEUE, task.getTask_id(), JSON.toJSONString(task));
+        return ResultData.getSuccessResult("爬虫提交成功");
+    }
 
+    @ApiOperation(value = "停止爬虫任务")
+    @GetMapping("/stop")
+    public ResultData stopTask(@RequestParam String task_id, HttpServletResponse httpServletResponse) {
+        SpriderTask task = JSON.parseObject(redisServiceImpl.hget(R_TASK_QUEUE, task_id), SpriderTask.class);
+        task.setTask_status(TASK_STATUS_SOTP.getCode());
+        redisServiceImpl.hset(R_TASK_QUEUE, task.getTask_id(), JSON.toJSONString(task));
+        return ResultData.getSuccessResult("爬虫停止成功");
     }
 }

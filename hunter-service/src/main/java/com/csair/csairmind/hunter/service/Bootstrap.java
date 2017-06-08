@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@ComponentScan(basePackages = {"com.csair.csairmind.hunter.service"})
+@ComponentScan(basePackages = {"com.csair.csairmind.hunter.common", "com.csair.csairmind.hunter.service"})
 public class Bootstrap {
     public static void main(String[] args) {
         SpringApplication.run(Bootstrap.class, args);

@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Created by zhangcheng
- * 测试爬虫任务请求
+ * 提交爬虫任务请求
  */
 @Data
 @ApiModel
