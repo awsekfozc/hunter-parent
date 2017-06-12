@@ -17,21 +17,20 @@ import us.codecraft.webmagic.processor.PageProcessor;
 @Data
 public class DetailsSingleProcessor implements HunterPageProcessor {
 
-    private DetailsRule task;
+    private DetailsRule rule;
 
     private Site site = ExpandSite.me();
 
     @Override
     public void process(Page page,Object rule) {
-        this.setTask((DetailsRule)rule);
-        page.putField(DataConstants.TITLE, page.getHtml().xpath(task.getTitle_extract_rule()));
-        page.putField(DataConstants.DATE_TIME, page.getHtml().xpath(task.getDate_extract_rule()));
-        page.putField(DataConstants.CONTENT, ContentUtils.removeUrlContent(page.getHtml().xpath(task.getContent_extract_rule()).get()));
-        page.putField(DataConstants.DATA_SOURCE, task.getData_source());
-        if (StringUtils.isBlank(task.getSource_extract_rule()))
-            page.putField(DataConstants.DATA_URL, task.getUrl());
+        this.setRule((DetailsRule)rule);
+        page.putField(DataConstants.TITLE, page.getHtml().xpath(this.rule.getTitle_extract_rule()).get());
+        page.putField(DataConstants.DATE_TIME, page.getHtml().xpath(this.rule.getDate_extract_rule()).get());
+        page.putField(DataConstants.CONTENT, ContentUtils.removeUrlContent(page.getHtml().xpath(this.rule.getContent_extract_rule()).get()));
+        page.putField(DataConstants.DATA_SOURCE, this.rule.getData_source());
+        if (StringUtils.isBlank(this.rule.getSource_extract_rule()))
+            page.putField(DataConstants.DATA_URL, this.rule.getUrl());
         else
-            page.putField(DataConstants.DATA_URL, page.getHtml().xpath(task.getSource_extract_rule()));
-
+            page.putField(DataConstants.DATA_URL, page.getHtml().xpath(this.rule.getSource_extract_rule()).get());
     }
 }

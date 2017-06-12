@@ -1,6 +1,5 @@
 package com.csair.csairmind.hunter.service.api;
 
-import com.csair.csairmind.hunter.service.request.CheckUserRequest;
 import com.csair.csairmind.hunter.service.request.MachineInfoRequest;
 import com.csair.csairmind.hunter.service.result.ResultData;
 import io.swagger.annotations.Api;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.List;
 
 
 /**

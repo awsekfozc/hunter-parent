@@ -28,6 +28,9 @@ public class SwaggerConfig {
 
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("爬虫服务接口中心").version("1.0-SNAPSHOT").build();
+        return new ApiInfoBuilder()
+                .title("爬虫服务接口中心")
+                .version("1.0-SNAPSHOT")
+                .build();
     }
 }

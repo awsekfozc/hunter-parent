@@ -45,6 +45,7 @@ public class SpriderTaskService {
 
     @Autowired
     IRedisService redisServiceImpl;
+
     @Value("${max_test_size}")
     private int max_test_size;
 
@@ -52,7 +53,7 @@ public class SpriderTaskService {
     @PostMapping("/test")
     public ResultData<List<Map<String, Object>>> testSprider(@Valid @RequestBody SpriderTestRequest spriderTestRequest, @RequestHeader HttpHeaders headers, HttpServletResponse httpServletResponse) {
         ResourceRule task = new ResourceRule();
-        List<Map<String, Object>> resultData = new ArrayList<>();
+        List<Map<String, Object>> resultData;
         try {
             BeanUtils.copyProperties(spriderTestRequest, task);
             TestTaskScheduler scheduler = new TestTaskScheduler();//使用测试爬虫scheduler
@@ -77,9 +78,7 @@ public class SpriderTaskService {
             }
             spider.run();
             resultData = pipeline.getDataList();
-
         } catch (Exception e) {
-            System.out.println(e);
             return ResultData.getFailResult("测试爬虫任务失败" + e.getMessage());
         }
         return ResultData.getSuccessResult(resultData, "爬虫测试成功");
