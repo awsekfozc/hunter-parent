@@ -1,4 +1,4 @@
-package com.csair.csairmind.hunter.spider.exception;
+package com.csair.csairmind.hunter.common.exception;
 
 /**
  * Created by zhangcheng on 2017/5/23 0023.

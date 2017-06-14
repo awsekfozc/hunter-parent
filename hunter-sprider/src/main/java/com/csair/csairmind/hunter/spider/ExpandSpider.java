@@ -5,7 +5,7 @@ import com.csair.csairmind.hunter.common.util.SimHash;
 import com.csair.csairmind.hunter.spider.distinct.ContentDistinct;
 import com.csair.csairmind.hunter.spider.distinct.Distinct;
 import com.csair.csairmind.hunter.spider.distinct.UrlDistinct;
-import com.csair.csairmind.hunter.spider.exception.NoGetReadyException;
+import com.csair.csairmind.hunter.common.exception.NoGetReadyException;
 import com.csair.csairmind.hunter.spider.factory.RedisFactory;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsListProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
@@ -23,7 +23,6 @@ import us.codecraft.webmagic.downloader.Downloader;
 import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.pipeline.Pipeline;
-import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.Scheduler;
 
 import java.io.Closeable;

@@ -173,15 +173,10 @@ public class SpriderTest {
             }
 
             public Site getSite() {
-                return Site.me()
-                        .setHttpProxy(new HttpHost("proxy.abuyun.com", 9020))
-                        .setUsernamePasswordCredentials(new UsernamePasswordCredentials("H9142YEPE0R727DD", "B96781AC19AC1926"))
-                        .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36")
-                        .addHeader("Cookie", "Hm_lvt_a5257df898f02b3e0889ce42109b2628=1492999687,1493023645,1493024323,1493861217; _ga=GA1.2.1820557420.1492743250; XSRF-TOKEN=eyJpdiI6InVjUnFHQzdINDNLMU1qMW1LWnpwZ2c9PSIsInZhbHVlIjoialplMHBxbWlYRVwvMWhWZmZhM1F3VVk5WDJoUEx5V2l2Nk1pRlwvbURHWFVzQ1NBWmpHZUlVWURKeW5iamRNV2hCbG5Zb2ltZDdFVzlDYUpubCsrVjEyQT09IiwibWFjIjoiNjQxMDlhMTIzNGYxMzRlMzk3ZTc5ZDY3ZTM3MzZlN2E3YzEzMDNkOGMzMjY0ZTIxMGRkMGMzMjFhNjE0MGI5OCJ9; laravel_session=eyJpdiI6IjZGTVwvekRRdmJTOU5iUldrUTF0S1dnPT0iLCJ2YWx1ZSI6Ik55R2NVYjM4R2pcL0U0bWNTVGp4Z2lQT1wvXC8xdTZtU3VOQmVLaTdaR1JCRURoMTRiM2tNRHNOMXlNNnNqSUJGbFhMa2pHNmVrYzQ5dk9QZXl2dEFaQVRRPT0iLCJtYWMiOiI1ZmJjYjdjMDFmNjQxM2UzZDNiNjhhMTE1MTI3ZDFhMDMyZDU3Y2U0OWVkMDI0MmNmZWNlZmQ2MWNmNTZjNzRhIn0%3D")
-                        .addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                return Site.me();
             }
         });
-        spider.test("https://www.capse.net/sound/comments?page=1&limit=20");
+        spider.test("http://10.92.8.18:9999/blobdiff/bi%2Floong.git/7eae9fc958e4d69f4cdfa6ab92704e5b17ff8c10/loong-web-ui%2Fsrc%2Fmain%2Fjava%2Fcom%2Fcsair%2Floong%2FdataReport%2Fcontroller%2FLoadCapacityTimeTask.java");
     }
 
     @Test
