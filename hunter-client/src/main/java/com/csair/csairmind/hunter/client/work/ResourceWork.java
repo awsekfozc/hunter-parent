@@ -29,7 +29,9 @@ public class ResourceWork extends BaseThread {
     @Autowired
     RedisConfigVo redisConfigVo;
 
-    public ResourceWork() {}
+    public ResourceWork() {
+
+    }
 
     @Override
     public void doing() {
