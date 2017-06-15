@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * Created by zhangcheng on 2017/5/25 0025.
+ * Created by zhangcheng
  */
 @Data
 public class DetailsRule implements Serializable {

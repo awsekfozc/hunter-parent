@@ -7,6 +7,7 @@ import com.csair.csairmind.hunter.spider.distinct.Distinct;
 import com.csair.csairmind.hunter.spider.distinct.UrlDistinct;
 import com.csair.csairmind.hunter.common.exception.NoGetReadyException;
 import com.csair.csairmind.hunter.spider.factory.RedisFactory;
+import com.csair.csairmind.hunter.spider.increment.TaskIncrement;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsListProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.HunterPageProcessor;
@@ -48,6 +49,8 @@ public class ExpandSpider implements Task, Runnable {
     private String uuid;
     //资源调度
     private DistinctScheduler scheduler;
+    //增量资源调度
+    private TaskIncrement increment;
     private int threadNum = 1;
     private AtomicInteger stat = new AtomicInteger(0);
     private boolean spawnUrl = true;
@@ -104,10 +107,10 @@ public class ExpandSpider implements Task, Runnable {
         Page page = this.downloader.download(request, this);
         if (page == null) {
         } else if (page.isNeedCycleRetry()) {
-            this.extractAndAddRequests(page, true);
+            this.extractAndAddRequests(page, true, rule);
         } else {
             this.pageProcessor.process(page, rule);
-            this.extractAndAddRequests(page, this.spawnUrl);
+            this.extractAndAddRequests(page, this.spawnUrl, rule);
         }
     }
 
@@ -188,18 +191,26 @@ public class ExpandSpider implements Task, Runnable {
      * @param page
      * @param spawnUrl
      */
-    protected void extractAndAddRequests(Page page, boolean spawnUrl) {
+    protected void extractAndAddRequests(Page page, boolean spawnUrl, Object rule) {
         int i = 0;
+        boolean isIncrement = true;
         if (spawnUrl && CollectionUtils.isNotEmpty(page.getTargetRequests())) {
             Iterator var3 = page.getTargetRequests().iterator();
             while (var3.hasNext()) {
                 Request request = (Request) var3.next();
                 if (distinct instanceof UrlDistinct && distinct != null) {
-                    if (distinct.isDistinct(request.getUrl()))//如果存在URL，不添加到资源池中
+                    if (distinct.isDistinct(request.getUrl())) {//如果存在URL，不添加到资源池中
+                        isIncrement = false;
                         continue;
+                    }
                 }
                 this.scheduler.push(request, this);
                 i++;
+            }
+            //如果新发现的URL都不存在,则新增下一页任务到任务池
+            if (distinct instanceof UrlDistinct && isIncrement) {
+                log.info("新增下一页资源任务{}",rule);
+                this.increment.put(rule);
             }
         }
         log.info("新增资源 {} 个", i);
@@ -271,7 +282,6 @@ public class ExpandSpider implements Task, Runnable {
                 var3.printStackTrace();
             }
         }
-
     }
 
     public Downloader getDownloader() {
@@ -331,4 +341,8 @@ public class ExpandSpider implements Task, Runnable {
         return this;
     }
 
+    public ExpandSpider setIncrement(TaskIncrement increment) {
+        this.increment = increment;
+        return this;
+    }
 }

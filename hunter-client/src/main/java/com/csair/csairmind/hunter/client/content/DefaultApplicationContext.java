@@ -5,7 +5,6 @@ import com.csair.csairmind.hunter.client.service.WrapService;
 import com.csair.csairmind.hunter.client.work.DetailsWork;
 import com.csair.csairmind.hunter.client.work.HeartWorker;
 import com.csair.csairmind.hunter.client.work.ResourceWork;
-import com.csair.csairmind.hunter.common.inf.MgrService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,12 +43,15 @@ public class DefaultApplicationContext implements ApplicationContext {
         return instance;
     }
 
-
     @Override
     public void start() {
+        //机器注册
         if (wrapService.register()) {
+            //启动心跳任务
             heartWorker.start();
+            //启动心跳资源解析任务
             resourceWork.start();
+            //启动详情解析任务
             detailsWork.start();
         } else {
            log.error("注册机器失败........");
@@ -74,7 +76,6 @@ public class DefaultApplicationContext implements ApplicationContext {
         }
     }
 
-
     /**
      * 会话key
      */
@@ -83,6 +84,4 @@ public class DefaultApplicationContext implements ApplicationContext {
      * 机器编号
      */
     public static String MACHINEID = "";
-
-
 }

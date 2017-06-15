@@ -8,12 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by zhangcheng on 2017/5/23 0023.
+ * Created by zhangcheng
  * 资源解析任务实体类
  */
 @Data
 @ToString
 public class ResourceRule implements Serializable {
+
     //详情URL表达式
     private String details_url_reg;
 
@@ -30,10 +31,10 @@ public class ResourceRule implements Serializable {
     private String task_id;
 
     //最大页数
-    private Integer maxPageSize;
+    private Integer max_page_num;
 
     //当前页数
-    private Integer nowPageSize;
+    private Integer now_page_mun;
 
     //分页表达式
     private String paging_reg;

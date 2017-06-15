@@ -1,6 +1,5 @@
 package com.csair.csairmind.hunter.client.work;
 
-
 import static com.csair.csairmind.hunter.common.enums.OperateCodeHolder.RESOURCE_TASK_SUCCESS;
 
 import com.csair.csairmind.hunter.common.config.RedisConfigVo;
@@ -11,13 +10,13 @@ import com.csair.csairmind.hunter.common.response.ResourceTaskResponse;
 import com.csair.csairmind.hunter.common.vo.ResourceRule;
 import com.csair.csairmind.hunter.spider.ExpandSpider;
 import com.csair.csairmind.hunter.spider.factory.DistinctFactory;
+import com.csair.csairmind.hunter.spider.increment.ResourceTaskIncrement;
 import com.csair.csairmind.hunter.spider.processor.currency.ResourcesProcessor;
 import com.csair.csairmind.hunter.spider.schedule.ResourceTaskScheduler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.JedisPool;
-
 
 /**
  * Created by zhangcheng
@@ -33,7 +32,6 @@ public class ResourceWork extends BaseThread {
     public ResourceWork() {
 
     }
-
 
     @Override
     public void doing() {
@@ -53,7 +51,8 @@ public class ResourceWork extends BaseThread {
                     log.info("开始执行资源解析任务");
                     ExpandSpider.create(new ResourcesProcessor(), new JedisPool(redisConfigVo.getHostName()))
                             .setScheduler(new ResourceTaskScheduler())
-                            .setStartRequest(task.getUrl(),task)
+                            .setStartRequest(task.getUrl(), task)
+                            .setIncrement(new ResourceTaskIncrement())
                             .setDistinct(DistinctFactory.getInstance(task.getDistinct_type()))
                             .run();
                 }

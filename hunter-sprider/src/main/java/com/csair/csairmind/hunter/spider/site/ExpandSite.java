@@ -3,7 +3,7 @@ package com.csair.csairmind.hunter.spider.site;
 import us.codecraft.webmagic.Site;
 
 /**
- * Created by zhangcheng on 2017/5/22 0022.
+ * Created by zhangcheng
  */
 public class ExpandSite extends Site {
 
