@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@ComponentScan(basePackages = {"com.csair.csairmind.hunter.common", "com.csair.csairmind.hunter.master.service"})
+@ComponentScan(basePackages = {"com.csair.csairmind.hunter.common", "com.csair.csairmind.hunter.master"})
 @ImportResource({"classpath:dubbo-producer.xml"})
 public class Bootstrap {
 

@@ -22,7 +22,7 @@ public class PhantomJs {
         StringBuffer sbf = new StringBuffer();
         String tmp = "";
         while ((tmp = br.readLine()) != null) {
-            sbf.append(tmp);
+            sbf.append(tmp + "\n");
         }
         System.out.println(sbf);
     }
@@ -37,7 +37,7 @@ public class PhantomJs {
         StringBuffer sbf = new StringBuffer();
         String tmp = "";
         while ((tmp = br.readLine()) != null) {
-            sbf.append(tmp);
+            sbf.append(tmp + "\n");
         }
         System.out.println(sbf);
     }

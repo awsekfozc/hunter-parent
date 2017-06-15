@@ -7,8 +7,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -51,9 +54,33 @@ public class PhantomjsUtils {
         return resultMap;
     }
 
+    public static WebDriver getPhantomJs() {
+        String osname = System.getProperties().getProperty("os.name");
+        if (osname.equals("Linux")) {//判断系统的环境win or Linux
+            System.setProperty("phantomjs.binary.path", "/usr/bin/phantomjs");
+        } else {
+            System.setProperty("phantomjs.binary.path", "G:\\phantomjs\\bin\\phantomjs.exe");//设置PhantomJs访问路径
+        }
+        DesiredCapabilities desiredCapabilities = DesiredCapabilities.phantomjs();
+        //设置参数
+//        desiredCapabilities.setCapability("phantomjs.page.settings.userAgent", "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:50.0) Gecko/20100101 Firefox/50.0");
+//        desiredCapabilities.setCapability("phantomjs.page.customHeaders.User-Agent", "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:50.0) Gecko/20100101 　　Firefox/50.0");
+        if (false) {//是否使用代理
+            org.openqa.selenium.Proxy proxy = new org.openqa.selenium.Proxy();
+            proxy.setProxyType(org.openqa.selenium.Proxy.ProxyType.MANUAL);
+            proxy.setAutodetect(false);
+            String proxyStr = "";
+            do {
+                proxyStr = "";//自定义函数，返回代理ip及端口
+            } while (proxyStr.length() == 0);
+            proxy.setHttpProxy(proxyStr);
+            desiredCapabilities.setCapability(CapabilityType.PROXY, proxy);
+        }
+        return new PhantomJSDriver(desiredCapabilities);
+    }
+
     public static void click(String username, String password) throws InterruptedException {
-        System.setProperty("phantomjs.binary.path", "G:\\phantomjs\\bin");
-        WebDriver driver = new PhantomJSDriver();
+        WebDriver driver = getPhantomJs();
         driver.get("http://weibo.com/login.php");
         //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Thread.sleep(1000 * 5);

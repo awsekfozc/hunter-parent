@@ -15,7 +15,7 @@
         <module name="hunter-sprider" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="hunter-client" target="1.8" />
       <module name="hunter-common" target="1.8" />
       <module name="hunter-master" target="1.8" />

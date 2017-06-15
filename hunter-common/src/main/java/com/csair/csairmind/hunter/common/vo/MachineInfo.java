@@ -1,6 +1,7 @@
 package com.csair.csairmind.hunter.common.vo;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -8,6 +9,7 @@ import java.io.Serializable;
  * Created by zhangcheng
  */
 @Data
+@ToString
 public class MachineInfo implements Serializable {
     /**
      * 机器ID

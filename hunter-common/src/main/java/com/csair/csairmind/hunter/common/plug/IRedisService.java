@@ -11,6 +11,10 @@ public interface IRedisService {
 
     public String hget(String key, String value);
 
+    public void hdel(String key, String... value);
+
+    public void del(String key);
+
     public Map<String,String> hgetAll(String key);
 
     public boolean set(String key, String value);

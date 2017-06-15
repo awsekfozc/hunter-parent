@@ -5,14 +5,14 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+
 /**
+ * Created by zhangcheng
  * 返回结果
- *
- * @author xianyongjie
  */
 @Data
 @ApiModel(value = "返回结果")
-public class ResultData<T>  implements Serializable {
+public class ResultData<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class ResultData<T>  implements Serializable {
     public static ResultData getFailResult() {
         return new ResultData(ERR, ERR_MSG);
     }
-    
+
     /**
      * 失败
      *
@@ -71,7 +71,7 @@ public class ResultData<T>  implements Serializable {
      * @param <T>
      * @return
      */
-    public static <T>ResultData getSuccessData(T data) {
+    public static <T> ResultData getSuccessData(T data) {
         return new ResultData(OK, OK_MSG, data);
     }
 
@@ -82,7 +82,7 @@ public class ResultData<T>  implements Serializable {
      * @param message
      * @return
      */
-    public static <T>ResultData getSuccessResult(T data, String message) {
+    public static <T> ResultData getSuccessResult(T data, String message) {
         return new ResultData(OK, message, data);
     }
 

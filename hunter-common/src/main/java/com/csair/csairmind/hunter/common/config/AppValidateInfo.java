@@ -18,4 +18,5 @@ public class AppValidateInfo {
     private Integer heartBeatTime;
     private Integer exception_wait_mill_seconds;
     private Integer applyTaskTime;
+    private Integer monitoring_machine_time;
 }

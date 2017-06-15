@@ -54,7 +54,6 @@ public class DefaultApplicationContext implements ApplicationContext {
         } else {
            log.error("注册机器失败........");
         }
-
     }
 
     @Override
