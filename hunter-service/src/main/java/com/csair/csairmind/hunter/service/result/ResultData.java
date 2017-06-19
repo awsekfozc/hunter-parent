@@ -112,6 +112,4 @@ public class ResultData<T> implements Serializable {
         this.data = data;
         return this;
     }
-
-
 }

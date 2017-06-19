@@ -2,14 +2,11 @@ package com.csair.csairmind.hunter.master;
 
 import com.csair.csairmind.hunter.common.plug.IRedisService;
 import com.csair.csairmind.hunter.master.monitor.MonitoringMachineThread;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-
-import static com.csair.csairmind.hunter.common.constant.SprderConstants.MACHINE_QUEUE_PREFIX;
 
 /**
  * 任务启动类

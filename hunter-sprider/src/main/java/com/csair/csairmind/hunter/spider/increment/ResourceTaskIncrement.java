@@ -31,5 +31,6 @@ public class ResourceTaskIncrement implements TaskIncrement {
             //提交到任务池
             jedis.lpush(R_RESOURCE_TASK, JSON.toJSONString(resourceRule));
         }
+
     }
 }
