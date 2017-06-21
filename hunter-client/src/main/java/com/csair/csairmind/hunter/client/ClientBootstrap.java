@@ -11,8 +11,8 @@ import org.springframework.context.annotation.ImportResource;
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.csair.csairmind.hunter.common","com.csair.csairmind.hunter.client"})
 @ImportResource({ "classpath:dubbo-consum.xml" })
-public class Bootstrap {
+public class ClientBootstrap {
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(Bootstrap.class, args);
+        SpringApplication.run(ClientBootstrap.class, args);
     }
 }

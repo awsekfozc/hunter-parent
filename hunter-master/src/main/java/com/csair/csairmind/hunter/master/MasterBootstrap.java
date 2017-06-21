@@ -11,10 +11,10 @@ import org.springframework.context.annotation.ImportResource;
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.csair.csairmind.hunter.common", "com.csair.csairmind.hunter.master"})
 @ImportResource({"classpath:dubbo-producer.xml"})
-public class Bootstrap {
+public class MasterBootstrap {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(Bootstrap.class, args);
+        SpringApplication.run(MasterBootstrap.class, args);
         System.in.read();
     }
 }

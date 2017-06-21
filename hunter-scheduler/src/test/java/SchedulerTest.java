@@ -42,7 +42,7 @@ public class SchedulerTest {
 
     public Map<String, Object> getWrodTask(){
         task.put("url", "http://search.sina.com.cn/?q=%C4%CF%BA%BD&range=all&c=news&sort=time&col=&source=&from=&country=&size=&time=&a=&page=1&pf=2131425470&ps=2134309112&dpc=1");
-        task.put("page_reg", "http://search.sina.com.cn/?q=%s&range=all&c=news&sort=time&col=&source=&from=&country=&size=&time=&a=&page=%d&pf=2131425470&ps=2134309112&dpc=1");//分页表达式
+        task.put("page_reg", "http://search.sina.com.cn/?q=${word}&range=all&c=news&sort=time&col=&source=&from=&country=&size=&time=&a=&page=${page}&pf=2131425470&ps=2134309112&dpc=1");//分页表达式
         task.put("details_url_xpath", "//*[@id=\"result\"]/div[4]");
         task.put("details_url_reg", "");
         task.put("details_url_jpath", "");

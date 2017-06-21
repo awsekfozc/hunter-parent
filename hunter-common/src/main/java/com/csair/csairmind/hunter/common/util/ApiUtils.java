@@ -50,7 +50,6 @@ public class ApiUtils {
 
     /**
      * 获取本地IP，失败返回空
-     *
      * @return
      */
     public static String getLocalIp() {
@@ -65,7 +64,6 @@ public class ApiUtils {
 
     /**
      * 获取mac，失败返回空
-     *
      * @return
      */
     public static String getLocalMac() {
@@ -74,7 +72,6 @@ public class ApiUtils {
             //获取网卡，获取地址
             InetAddress ia = InetAddress.getLocalHost();
             byte[] mac = NetworkInterface.getByInetAddress(ia).getHardwareAddress();
-            log.info("mac数组长度：" + mac.length);
             StringBuffer sb = new StringBuffer("");
             for (int i = 0; i < mac.length; i++) {
                 if (i != 0) {
@@ -99,8 +96,4 @@ public class ApiUtils {
         }
         return "";
     }
-
-    public static void main(String[] args) throws Exception {
-    }
-
 }

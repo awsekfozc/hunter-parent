@@ -7,6 +7,7 @@ import com.csair.csairmind.hunter.common.response.ApiResponse;
 import com.csair.csairmind.hunter.common.response.DetalisTaskResponse;
 import com.csair.csairmind.hunter.common.vo.DetailsRule;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,8 +36,9 @@ public class DetalisTaskService extends BasicApiService {
 
         //客户端机器在线
         if (redisServiceImpl.hexists(MACHINE_QUEUE_PREFIX, machineId)) {
-            task = JSON.parseObject(redisServiceImpl.hget(R_DETAILS_TASK, redisServiceImpl.lpop(R_DETAILS_TASK_KEY)), DetailsRule.class);
-
+            String url = redisServiceImpl.lpop(R_DETAILS_TASK_KEY);
+            if (StringUtils.isNotBlank(url))
+                task = JSON.parseObject(redisServiceImpl.hget(R_DETAILS_TASK, url), DetailsRule.class);
         }
         DetalisTaskResponse response = new DetalisTaskResponse();
         response.setOperateCodeHolder(DETALIS_TASK_SUCCESS);

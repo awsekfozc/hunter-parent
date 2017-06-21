@@ -1,6 +1,7 @@
 package com.csair.csairmind.hunter.spider.increment;
 
 import com.alibaba.fastjson.JSON;
+import com.csair.csairmind.hunter.common.enums.MatchCharEnums;
 import com.csair.csairmind.hunter.common.vo.ResourceRule;
 import com.csair.csairmind.hunter.common.vo.Rule;
 import com.csair.csairmind.hunter.spider.factory.RedisFactory;
@@ -8,6 +9,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import static com.csair.csairmind.hunter.common.constant.SprderConstants.R_RESOURCE_TASK;
+import static com.csair.csairmind.hunter.common.enums.MatchCharEnums.PAGE_MATCH;
 
 /**
  * Created by fate
@@ -26,7 +28,7 @@ public class ResourceTaskIncrement implements TaskIncrement {
         int now_page_mun = resourceRule.getNow_page_mun();
         int max_page_mun = resourceRule.getMax_page_num();
         if (now_page_mun + 1 <= max_page_mun) {
-            paging_reg = paging_reg.replace("${d}", (now_page_mun + 1) + "");
+            paging_reg = paging_reg.replace(PAGE_MATCH.getMatch(), (now_page_mun + 1) + "");
             resourceRule.setNow_page_mun(now_page_mun + 1);
             resourceRule.setUrl(paging_reg);
             //提交到任务池

@@ -1,7 +1,7 @@
 import com.alibaba.fastjson.JSON;
 import com.csair.csairmind.hunter.common.constant.SprderConstants;
 import com.csair.csairmind.hunter.common.plug.RedisServiceImpl;
-import com.csair.csairmind.hunter.master.Bootstrap;
+import com.csair.csairmind.hunter.master.MasterBootstrap;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ import static com.csair.csairmind.hunter.common.constant.SprderConstants.R_RESOU
  * Created by zhangcheng
  */
 @RunWith(SpringRunner.class)
-@Import(Bootstrap.class)
+@Import(MasterBootstrap.class)
 public class ProperTest {
 
     @Autowired

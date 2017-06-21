@@ -35,7 +35,7 @@ public class SpriderTask implements Serializable {
     //来源网站
     private String data_source;
     //任务类型
-    private String task_type;
+    private Integer task_type;
     //增量间隔
     private Long increment_rule;
     //搜索关键字
@@ -48,5 +48,7 @@ public class SpriderTask implements Serializable {
     private String request_time;
     //爬虫状态
     private Integer task_status;
+    //关键字编码格式
+    private String wrod_code;
 
 }
