@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @ToString
 @Configuration
-@ConfigurationProperties(prefix = "spring.redis", locations = "classpath:application.properties")
+@ConfigurationProperties(prefix = "spring.redis", locations = "classpath:dev/application.properties")
 public class RedisConfigVo {
     private String hostName;
 }

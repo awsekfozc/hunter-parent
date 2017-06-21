@@ -11,7 +11,7 @@
 
     <artifactId>hunter-service</artifactId>
     <properties>
-        <swagger.version>2.5.0</swagger.version>
+        <swagger.version>2.7.0</swagger.version>
     </properties>
     <dependencies>
         <dependency>

@@ -38,7 +38,7 @@ import static com.csair.csairmind.hunter.common.enums.SpriderEnums.TASK_STATUS_S
  */
 @RestController
 @Slf4j
-@Api(tags = {"爬虫任务接口"})
+@Api(tags ="爬虫任务接口")
 @RequestMapping(value = "/sprider")
 public class SpriderTaskService {
 

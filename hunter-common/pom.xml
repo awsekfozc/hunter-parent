@@ -26,13 +26,31 @@
     </dependencies>
 
 
+    <profiles>
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 生产环境 -->
+            <id>ready</id>
+            <properties>
+                <profiles.active>ready</profiles.active>
+            </properties>
+        </profile>
+    </profiles>
     <build>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
-                    <exclude>test/*</exclude>
-                    <exclude>prod/*</exclude>
+                    <exclude>ready/*</exclude>
                     <exclude>dev/*</exclude>
                 </excludes>
             </resource>

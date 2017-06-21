@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @ToString
 @Configuration
-@ConfigurationProperties(prefix = "hunter.app",locations = "classpath:application.properties")
+@ConfigurationProperties(prefix = "hunter.app",locations = "classpath:dev/application.properties")
 public class AppValidateInfo {
     private String appKey;
     private String appSecret;

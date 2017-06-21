@@ -13,14 +13,14 @@
        default-lazy-init="false">
 
     <!-- 提供方应用名称信息，这个相当于起一个名字，我们dubbo管理页面比较清晰是哪个应用暴露出来的 -->
-    <dubbo:application name="hunter"></dubbo:application>
+    <dubbo:application name="${dubbo.application.name}"></dubbo:application>
 
 
-    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <!-- 使用zookeeper注册中心暴露服务地址-->
 
-    <dubbo:registry address="zookeeper://127.0.0.1:2181" check="false" subscribe="false" register=""></dubbo:registry>
+    <dubbo:registry address="${dubbo.registry.address}" check="false" subscribe="false" register=""></dubbo:registry>
     <dubbo:protocol name="dubbo" port="22881"/>
-    <!-- 要暴露的服务接口 -->
+    <!-- 要暴露的服务接口-->
     <bean id="mgrService" class="com.csair.csairmind.hunter.master.inf.MgrServiceImpl"/>
     <dubbo:service interface="com.csair.csairmind.hunter.common.inf.MgrService" ref="mgrService"/>
 

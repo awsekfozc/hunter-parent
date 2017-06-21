@@ -15,7 +15,7 @@ import redis.clients.jedis.JedisPoolConfig;
  */
 @Slf4j
 @Configuration
-@ConfigurationProperties(prefix="spring.redis",locations = "classpath:application.properties")
+@ConfigurationProperties(prefix="spring.redis",locations = "classpath:dev/application.properties")
 public class RedisConfig {
 
     @Bean
