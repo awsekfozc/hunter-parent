@@ -2,6 +2,7 @@ package com.csair.csairmind.hunter.spider.processor.currency;
 
 import com.csair.csairmind.hunter.common.vo.DetailsRule;
 import com.csair.csairmind.hunter.common.vo.ResourceRule;
+import com.csair.csairmind.hunter.common.vo.Rule;
 import com.csair.csairmind.hunter.spider.site.ExpandSite;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -28,16 +29,16 @@ public class ResourcesProcessor implements HunterPageProcessor {
 
     private Site site = ExpandSite.me();
 
-    private ResourceRule task;
+    private ResourceRule resourceRule;
 
-    public void process(Page page,Object rule) {
-        this.setTask((ResourceRule)rule);
+    public void process(Page page,Rule rule) {
+        this.setResourceRule((ResourceRule)rule);
         List<String> urls;
         try {
-            if (StringUtils.isNotBlank(task.getDetails_url_reg())) {
+            if (StringUtils.isNotBlank(resourceRule.getDetails_url_reg())) {
                 urls = getDetailsUrlsReg(page);
                 log.info("正则表达式解析资源，发现详情链接 {} 个", urls.size());
-            } else if (StringUtils.isNotBlank(task.getDetails_url_xpath())) {
+            } else if (StringUtils.isNotBlank(resourceRule.getDetails_url_xpath())) {
                 urls = getDetailsUrlsXpath(page);
                 log.info("Xpath解析资源，发现详情链接 {} 个", urls.size());
             } else {
@@ -46,8 +47,8 @@ public class ResourcesProcessor implements HunterPageProcessor {
             }
             for(String url:urls){
                 Request request = new Request(url);
-                task.setRequest_url(url);
-                request.setExtras(task.getDetailsParam());
+                resourceRule.setRequest_url(url);
+                request.setExtras(resourceRule.getDetailsParam());
                 page.addTargetRequest(request);
             }
         } catch (Exception ex) {
@@ -61,7 +62,7 @@ public class ResourcesProcessor implements HunterPageProcessor {
      * @return
      */
     public List<String> getDetailsUrlsXpath(Page page) {
-        return page.getHtml().xpath(task.getDetails_url_xpath()).links().all();
+        return page.getHtml().xpath(resourceRule.getDetails_url_xpath()).links().all();
     }
 
     /***
@@ -72,10 +73,10 @@ public class ResourcesProcessor implements HunterPageProcessor {
     public List<String> getDetailsUrlsReg(Page page) {
         List<String> urls;
         try {
-            urls = page.getHtml().regex(task.getDetails_url_reg()).links().all();
+            urls = page.getHtml().regex(resourceRule.getDetails_url_reg()).links().all();
         } catch (UnsupportedOperationException ex) {
             Set<String> urlsSet = new HashSet<String>();
-            Pattern pattern = Pattern.compile(task.getDetails_url_reg());
+            Pattern pattern = Pattern.compile(resourceRule.getDetails_url_reg());
             Matcher matcher = pattern.matcher(page.getRawText());
             while (matcher.find()) {
                 urlsSet.add(matcher.group());
@@ -91,6 +92,6 @@ public class ResourcesProcessor implements HunterPageProcessor {
      * @return
      */
     public List<String> getDetailsUrlsJpath(Page page) {
-        return page.getJson().xpath(task.getDetails_url_jpath()).links().all();
+        return page.getJson().xpath(resourceRule.getDetails_url_jpath()).links().all();
     }
 }

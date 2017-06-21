@@ -3,12 +3,12 @@ package com.csair.csairmind.hunter.spider.processor.currency;
 import com.csair.csairmind.hunter.common.constant.DataConstants;
 import com.csair.csairmind.hunter.common.util.ContentUtils;
 import com.csair.csairmind.hunter.common.vo.DetailsRule;
+import com.csair.csairmind.hunter.common.vo.Rule;
 import com.csair.csairmind.hunter.spider.site.ExpandSite;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
-import us.codecraft.webmagic.processor.PageProcessor;
 
 /**
  * Created by zhangcheng
@@ -22,7 +22,7 @@ public class DetailsSingleProcessor implements HunterPageProcessor {
     private Site site = ExpandSite.me();
 
     @Override
-    public void process(Page page,Object rule) {
+    public void process(Page page,Rule rule) {
         this.setRule((DetailsRule)rule);
         page.putField(DataConstants.TITLE, page.getHtml().xpath(this.rule.getTitle_extract_rule()).get());
         page.putField(DataConstants.DATE_TIME, page.getHtml().xpath(this.rule.getDate_extract_rule()).get());

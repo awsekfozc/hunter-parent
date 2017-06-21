@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by zhangcheng
  */
 @Data
-public class DetailsRule implements Serializable {
+public class DetailsRule implements Rule {
 
     //请求路径
     private String url;

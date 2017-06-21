@@ -2,6 +2,7 @@ package com.csair.csairmind.hunter.spider;
 
 import com.csair.csairmind.hunter.common.constant.DataConstants;
 import com.csair.csairmind.hunter.common.util.SimHash;
+import com.csair.csairmind.hunter.common.vo.Rule;
 import com.csair.csairmind.hunter.spider.distinct.ContentDistinct;
 import com.csair.csairmind.hunter.spider.distinct.Distinct;
 import com.csair.csairmind.hunter.spider.distinct.UrlDistinct;
@@ -56,7 +57,7 @@ public class ExpandSpider implements Task, Runnable {
     private boolean spawnUrl = true;
     private boolean spawnDistinct = true;
     //起始请求集合
-    private Map<Request, Object> startRequestMap = new HashMap<Request, Object>();
+        private Map<Request, Rule> startRequestMap = new HashMap<Request, Rule>();
     //去重方式
     private Distinct distinct;
     //超时时长
@@ -103,7 +104,7 @@ public class ExpandSpider implements Task, Runnable {
      * 资源解析任务处理
      * @param request
      */
-    protected void processResourceRequest(Request request, Object rule) {
+    protected void processResourceRequest(Request request, Rule rule) {
         Page page = this.downloader.download(request, this);
         if (page == null) {
         } else if (page.isNeedCycleRetry()) {
@@ -118,7 +119,7 @@ public class ExpandSpider implements Task, Runnable {
      * 解析单条详情任务处理
      * @param request
      */
-    protected void processDetailsSingleRequest(Request request, Object rule) {
+    protected void processDetailsSingleRequest(Request request, Rule rule) {
         Page page = this.downloader.download(request, this);
         if (page == null) {
         } else {
@@ -139,7 +140,7 @@ public class ExpandSpider implements Task, Runnable {
      * 解析列表详情任务处理
      * @param request
      */
-    protected void processDetailsListRequest(Request request, Object rule) {
+    protected void processDetailsListRequest(Request request, Rule rule) {
         Page page = this.downloader.download(request, this);
         if (page == null) {
         } else {
@@ -191,7 +192,7 @@ public class ExpandSpider implements Task, Runnable {
      * @param page
      * @param spawnUrl
      */
-    protected void extractAndAddRequests(Page page, boolean spawnUrl, Object rule) {
+    protected void extractAndAddRequests(Page page, boolean spawnUrl, Rule rule) {
         int i = 0;
         boolean isIncrement = true;
         if (spawnUrl && CollectionUtils.isNotEmpty(page.getTargetRequests())) {
@@ -307,16 +308,16 @@ public class ExpandSpider implements Task, Runnable {
         return this;
     }
 
-    public Map<Request, Object> getStartRequest() {
+    public Map<Request, Rule> getStartRequest() {
         return startRequestMap;
     }
 
-    public ExpandSpider setStartRequest(String requestString, Object rule) {
+    public ExpandSpider setStartRequest(String requestString, Rule rule) {
         this.startRequestMap.put(new Request(requestString), rule);
         return this;
     }
 
-    public ExpandSpider setStartRequest(Request startRequest, Object rule) {
+    public ExpandSpider setStartRequest(Request startRequest, Rule rule) {
         this.startRequestMap.put(startRequest, rule);
         return this;
     }

@@ -5,6 +5,7 @@ import com.csair.csairmind.hunter.common.vo.ResourceRule;
 import com.csair.csairmind.hunter.spider.ExpandSpider;
 import com.csair.csairmind.hunter.spider.distinct.ContentDistinct;
 import com.csair.csairmind.hunter.spider.factory.DistinctFactory;
+import com.csair.csairmind.hunter.spider.increment.ResourceTaskIncrement;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsListProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.ResourcesProcessor;
@@ -110,8 +111,9 @@ public class SpriderTest {
                 "    \"details_url_xpath\": \"//div[@class=\\\"r-info r-info2\\\"]\",\n" +
                 "    \"distinct_type\": \"1\",\n" +
                 "    \"increment_rule\": 60000,\n" +
-                "    \"max_page_size\": \"50\",\n" +
-                "    \"page_reg\": \"http://search.sina.com.cn/?q=%s&range=all&c=news&sort=time&col=&source=&from=&country=&size=&time=&a=&page=%d&pf=2131425470&ps=2134309112&dpc=1\",\n" +
+                "    \"max_page_num\": \"50\",\n" +
+                "    \"now_page_mun\": \"1\",\n" +
+                "    \"paging_reg\": \"http://search.sina.com.cn/?q=%s&range=all&c=news&sort=time&col=&source=&from=&country=&size=&time=&a=&page=${d}&pf=2131425470&ps=2134309112&dpc=1\",\n" +
                 "    \"request_time\": \"2017-06-05 15:10:33\",\n" +
                 "    \"search_wrods\": \"南航,航空,南方航空\",\n" +
                 "    \"source_extract_rule\": \"\",\n" +
@@ -123,6 +125,7 @@ public class SpriderTest {
         ResourceRule task = JSON.parseObject(ruleStr, ResourceRule.class);
         ExpandSpider.create(new ResourcesProcessor(), pool)
                 .setScheduler(new ResourceTaskScheduler())
+                .setIncrement(new ResourceTaskIncrement())
                 .setStartRequest(task.getUrl(), task)
                 .setDistinct(DistinctFactory.getInstance(task.getDistinct_type()))
                 .run();

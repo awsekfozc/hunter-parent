@@ -59,4 +59,9 @@ public class SpriderTestRequest {
 	@ApiModelProperty(value = "搜索关键字", required = false)
 	private String search_wrods;
 
+	//数据来源
+	@NotBlank(message = "参数[data_source]不能为空")
+	@ApiModelProperty(value = "数据来源", required = true)
+	private String data_source;
+
 }

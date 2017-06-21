@@ -56,12 +56,14 @@ public class PhantomjsUtils {
 
     public static WebDriver getPhantomJs() {
         String osname = System.getProperties().getProperty("os.name");
+        DesiredCapabilities desiredCapabilities = DesiredCapabilities.phantomjs();
         if (osname.equals("Linux")) {//判断系统的环境win or Linux
             System.setProperty("phantomjs.binary.path", "/usr/bin/phantomjs");
         } else {
-            System.setProperty("phantomjs.binary.path", "G:\\phantomjs\\bin\\phantomjs.exe");//设置PhantomJs访问路径
+            desiredCapabilities.setCapability("phantomjs.binary.path", "G:\\phantomjs\\bin\\phantomjs.exe");
         }
-        DesiredCapabilities desiredCapabilities = DesiredCapabilities.phantomjs();
+
+
         //设置参数
 //        desiredCapabilities.setCapability("phantomjs.page.settings.userAgent", "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:50.0) Gecko/20100101 Firefox/50.0");
 //        desiredCapabilities.setCapability("phantomjs.page.customHeaders.User-Agent", "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:50.0) Gecko/20100101 　　Firefox/50.0");

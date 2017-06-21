@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 /**
- * 机器注册
+ * 机器注册请求
  * Created by zhengcheng
  */
 @Data
