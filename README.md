@@ -1,6 +1,6 @@
 # 分布式爬虫MD
 
-标签（空格分隔）： hunter
+> hunter分布式爬虫系统，主要目的是开发一个可配置的，可管可控的爬虫系统
 
 ##爬虫功能模块结构图
 ![image_1bj4kpkid1v2a1nng1pk7sf91mv09.png-32.9kB][1]
