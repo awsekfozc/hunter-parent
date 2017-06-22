@@ -123,11 +123,7 @@ public class SpriderTest {
                 "    \"url\": \"http://search.sina.com.cn/?q=%C4%CF%BA%BD&range=all&c=news&sort=time\"\n" +
                 "}";
         ResourceRule task = JSON.parseObject(ruleStr, ResourceRule.class);
-        ExpandSpider.create(new ResourcesProcessor(), pool)
-                .setScheduler(new ResourceTaskScheduler())
-                .setIncrement(new ResourceTaskIncrement())
-                .setStartRequest(task.getUrl(), task)
-                .setDistinct(DistinctFactory.getInstance(task.getDistinct_type()))
+        ExpandSpider.create(task, pool)
                 .run();
     }
 
@@ -136,11 +132,7 @@ public class SpriderTest {
         Jedis jedis = pool.getResource();
         DetailsRule task = JSON.parseObject(jedis.hget(SprderConstants.R_DETAILS_TASK, jedis.lpop(SprderConstants.R_DETAILS_TASK_KEY)), DetailsRule.class);
         System.out.println(task);
-        ExpandSpider.create(new DetailsSingleProcessor(), pool)
-                .setScheduler(new ResourceTaskScheduler())
-                .setStartRequest(task.getUrl(), task)
-                .setPipeline(new ConsolePipeline())
-                .run();
+        ExpandSpider.create(task, pool).run();
     }
 
     @Test

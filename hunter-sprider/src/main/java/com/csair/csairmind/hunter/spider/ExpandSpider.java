@@ -7,13 +7,18 @@ import com.csair.csairmind.hunter.spider.distinct.ContentDistinct;
 import com.csair.csairmind.hunter.spider.distinct.Distinct;
 import com.csair.csairmind.hunter.spider.distinct.UrlDistinct;
 import com.csair.csairmind.hunter.common.exception.NoGetReadyException;
+import com.csair.csairmind.hunter.spider.factory.DistinctFactory;
+import com.csair.csairmind.hunter.spider.factory.PipelineFactory;
+import com.csair.csairmind.hunter.spider.factory.ProcessorFactory;
 import com.csair.csairmind.hunter.spider.factory.RedisFactory;
+import com.csair.csairmind.hunter.spider.increment.ResourceTaskIncrement;
 import com.csair.csairmind.hunter.spider.increment.TaskIncrement;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsListProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.HunterPageProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.ResourcesProcessor;
 import com.csair.csairmind.hunter.spider.schedule.DistinctScheduler;
+import com.csair.csairmind.hunter.spider.schedule.ResourceTaskScheduler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import redis.clients.jedis.JedisPool;
@@ -57,23 +62,34 @@ public class ExpandSpider implements Task, Runnable {
     private boolean spawnUrl = true;
     private boolean spawnDistinct = true;
     //起始请求集合
-        private Map<Request, Rule> startRequestMap = new HashMap<Request, Rule>();
+    private Map<Request, Rule> startRequestMap = new HashMap<Request, Rule>();
     //去重方式
     private Distinct distinct;
     //超时时长
-    private Integer timeOut = 15000;
+    private Integer timeOut = 10000;
 
 
     public static ExpandSpider create(HunterPageProcessor pageProcessor) {
-        return new ExpandSpider(pageProcessor, null);
+        return new ExpandSpider(pageProcessor, null, null);
     }
 
     public static ExpandSpider create(HunterPageProcessor pageProcessor, JedisPool pool) {
-        return new ExpandSpider(pageProcessor, pool);
+        return new ExpandSpider(pageProcessor, pool, null);
     }
 
-    public ExpandSpider(HunterPageProcessor pageProcessor, JedisPool pool) {
+    public static ExpandSpider create(Rule rule, JedisPool pool) {
+        return new ExpandSpider(ProcessorFactory.initProcessor(rule), pool, rule);
+    }
+
+    public ExpandSpider(HunterPageProcessor pageProcessor, JedisPool pool, Rule rule) {
         RedisFactory.init(pool);
+        if (rule != null) {
+            this.setScheduler(new ResourceTaskScheduler());
+            this.setIncrement(new ResourceTaskIncrement());
+            this.setPipeline(PipelineFactory.initPipeline(rule));
+            this.setStartRequest(rule);
+            this.setDistinct(DistinctFactory.getInstance(rule.getDistinct_type()));
+        }
         this.pageProcessor = pageProcessor;
         this.site = pageProcessor.getSite();
     }
@@ -210,7 +226,7 @@ public class ExpandSpider implements Task, Runnable {
             }
             //如果新发现的URL都不存在,则新增下一页任务到任务池
             if (distinct instanceof UrlDistinct && isIncrement) {
-                log.info("新增下一页资源任务{}",rule);
+                log.info("新增下一页资源任务{}", rule);
                 this.increment.put(rule);
             }
         }
@@ -224,10 +240,10 @@ public class ExpandSpider implements Task, Runnable {
     private void checkRunningStat() throws NoGetReadyException {
         if (startRequestMap.size() == 0)
             throw new NoGetReadyException("初始请求未设置");
-//        else if (scheduler == null)
-//            throw new NoGetReadyException("资源调度器未设置");
-//        else if (distinct == null)
-//            throw new NoGetReadyException("去重规则未设置");
+        else if (scheduler == null)
+            throw new NoGetReadyException("资源调度器未设置");
+        else if (distinct == null)
+            throw new NoGetReadyException("去重规则未设置");
     }
 
     public ExpandSpider setUUID(String uuid) {
@@ -314,6 +330,11 @@ public class ExpandSpider implements Task, Runnable {
 
     public ExpandSpider setStartRequest(String requestString, Rule rule) {
         this.startRequestMap.put(new Request(requestString), rule);
+        return this;
+    }
+
+    public ExpandSpider setStartRequest(Rule rule) {
+        this.startRequestMap.put(new Request(rule.getUrl()), rule);
         return this;
     }
 

@@ -13,6 +13,7 @@ import com.csair.csairmind.hunter.common.enums.SpriderEnums;
 import com.csair.csairmind.hunter.common.util.DateUtils;
 import com.csair.csairmind.hunter.common.util.JsonUtil;
 import com.csair.csairmind.hunter.common.plug.IRedisService;
+import com.csair.csairmind.hunter.common.vo.DetailsRule;
 import com.csair.csairmind.hunter.common.vo.ResourceRule;
 import com.csair.csairmind.hunter.common.vo.SpriderTask;
 import lombok.extern.slf4j.Slf4j;
@@ -74,7 +75,7 @@ public class ResourceScheduler {
                         task.setRequest_time(DateUtils.getDateTime());//更新提交时间
                         redisService.hset(R_TASK_QUEUE, task.getTask_id(), JSON.toJSONString(task));
                     } else if (task.getTask_type() == DETAILS_TASK.getCode()) {//详情
-
+                        DetailsRule rule = new DetailsRule();
                     }
                 }
                 task.getRequest_time();

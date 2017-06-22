@@ -10,6 +10,12 @@ import java.io.Serializable;
 @Data
 public class DetailsRule implements Rule {
 
+    //持久化类型
+    private Integer pipeline_type = 0;
+
+    //去重类型
+    private Integer distinct_type = 1;
+
     //请求路径
     private String url;
 

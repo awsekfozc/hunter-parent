@@ -59,7 +59,7 @@ public class SpriderTaskService {
             //执行资源解析任务
             ExpandSpider.create(new ResourcesProcessor())
                     .setScheduler(scheduler)
-                    .setStartRequest(task.getUrl(), task)
+                    .setStartRequest(task)
                     .run();
 
             //执行详情解析任务

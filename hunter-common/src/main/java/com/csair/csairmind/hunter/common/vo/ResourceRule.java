@@ -39,12 +39,15 @@ public class ResourceRule implements Rule {
     //分页表达式
     private String paging_reg;
 
-    //去重类型
-    private Integer distinct_type = 1;
-
     /***
      * 以下为详情解析任务需要信息
      */
+
+    //持久化类型
+    private Integer pipeline_type = 0;
+
+    //去重类型
+    private Integer distinct_type = 1;
     //请求路径
     private String request_url;
 
@@ -70,15 +73,16 @@ public class ResourceRule implements Rule {
      * 构造详情所需参数
      * @return
      */
-    public Map<String,Object> getDetailsParam(){
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("url",request_url);
-        map.put("title_extract_rule",title_extract_rule);
-        map.put("date_extract_rule",date_extract_rule);
-        map.put("source_extract_rule",source_extract_rule);
-        map.put("content_extract_rule",content_extract_rule);
-        map.put("data_source",data_source);
-        map.put("task_type",task_type);
+    public Map<String, Object> getDetailsParam() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("url", request_url);
+        map.put("distinct_type", distinct_type);
+        map.put("title_extract_rule", title_extract_rule);
+        map.put("date_extract_rule", date_extract_rule);
+        map.put("source_extract_rule", source_extract_rule);
+        map.put("content_extract_rule", content_extract_rule);
+        map.put("data_source", data_source);
+        map.put("task_type", task_type);
         return map;
     }
 }

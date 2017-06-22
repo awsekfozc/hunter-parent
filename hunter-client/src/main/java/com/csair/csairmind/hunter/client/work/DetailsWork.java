@@ -41,15 +41,13 @@ public class DetailsWork extends BaseThread {
             } else {
                 ApiResponse response = result.getResponse();
                 DetalisTaskResponse rsp = (DetalisTaskResponse) response;
-                DetailsRule task = rsp.getTask();
-                if (task == null) {
+                DetailsRule rule = rsp.getTask();
+                if (rule == null) {
                     log.info("无详情解析任务");
                 } else {
                     log.info("开始执行详情解析任务");
-                    ExpandSpider.create(new DetailsSingleProcessor(), new JedisPool(redisConfigVo.getHostName()))
-                            .setScheduler(new ResourceTaskScheduler())
-                            .setStartRequest(task.getUrl(),task)
-                            .setPipeline(new ConsolePipeline())
+                    ExpandSpider.
+                            create(rule, new JedisPool(redisConfigVo.getHostName()))
                             .run();
                 }
             }

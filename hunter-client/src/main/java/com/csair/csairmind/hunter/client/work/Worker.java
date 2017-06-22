@@ -5,7 +5,9 @@ package com.csair.csairmind.hunter.client.work;
  * Created by zhangcheng
  */
 public interface Worker {
-    public  void start();
-    public  void stop();
-    public void sleep(int millionSeconds) throws InterruptedException;
+    void start();
+
+    void stop();
+
+    void sleep(int millionSeconds) throws InterruptedException;
 }

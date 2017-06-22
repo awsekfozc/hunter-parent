@@ -13,7 +13,7 @@ import static com.csair.csairmind.hunter.common.enums.MatchCharEnums.PAGE_MATCH;
 
 /**
  * Created by fate
- * 资源解析任务增量
+ * 资源解析任务-增量
  */
 public class ResourceTaskIncrement implements TaskIncrement {
 
