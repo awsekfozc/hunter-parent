@@ -2,6 +2,9 @@
 
 > hunter分布式爬虫系统，主要目的是开发一个可配置的，可管可控的爬虫系统
 
+##爬虫技术结构
+![image_1bjp7fktl12io1f951k321k4i2ju9.png-34.2kB][1]
+
 ##爬虫功能模块结构图
 ![image_1bj4kpkid1v2a1nng1pk7sf91mv09.png-32.9kB][1]
 
@@ -186,6 +189,6 @@
 
 分布式爬虫系统-hunter 305855967@qq.com
 
-  [1]: http://static.zybuluo.com/awsekfozc/mpgivzndlzmulyjpjccilspg/image_1bj4kpkid1v2a1nng1pk7sf91mv09.png
-  [2]: http://static.zybuluo.com/awsekfozc/pqv2ywx3ppt6trjdcxjkop8o/image_1bj4kqppd16961h7iiipd3t1k5b9.png
-
+  [1]: http://static.zybuluo.com/awsekfozc/p315e726hcacndksw0c13z4f/image_1bjp7fktl12io1f951k321k4i2ju9.png
+  [2]: http://static.zybuluo.com/awsekfozc/mpgivzndlzmulyjpjccilspg/image_1bj4kpkid1v2a1nng1pk7sf91mv09.png
+  [3]: http://static.zybuluo.com/awsekfozc/pqv2ywx3ppt6trjdcxjkop8o/image_1bj4kqppd16961h7iiipd3t1k5b9.png
