@@ -6,7 +6,7 @@
 ![image_1bjp7fktl12io1f951k321k4i2ju9.png-34.2kB][1]
 
 ##爬虫功能模块结构图
-![image_1bj4kpkid1v2a1nng1pk7sf91mv09.png-32.9kB][1]
+![image_1bj4kpkid1v2a1nng1pk7sf91mv09.png-32.9kB][2]
 
 各模块主要功能如下：
 <table>
@@ -182,7 +182,7 @@
 
 ##爬虫技术结构图
 
-![image_1bj4kqppd16961h7iiipd3t1k5b9.png-95.4kB][2]
+![image_1bj4kqppd16961h7iiipd3t1k5b9.png-95.4kB][3]
 
 
 ---
