@@ -100,9 +100,13 @@ public class SpriderTaskService {
     @ApiOperation(value = "停止爬虫任务")
     @GetMapping("/stop")
     public ResultData stopTask(@RequestParam String task_id, HttpServletResponse httpServletResponse) {
-        SpriderTask task = JSON.parseObject(redisServiceImpl.hget(R_TASK_QUEUE, task_id), SpriderTask.class);
-        task.setTask_status(TASK_STATUS_SOTP.getCode());
-        redisServiceImpl.hset(R_TASK_QUEUE, task.getTask_id(), JSON.toJSONString(task));
-        return ResultData.getSuccessResult("爬虫停止成功");
+        try {
+            SpriderTask task = JSON.parseObject(redisServiceImpl.hget(R_TASK_QUEUE, task_id), SpriderTask.class);
+            task.setTask_status(TASK_STATUS_SOTP.getCode());
+            redisServiceImpl.hset(R_TASK_QUEUE, task.getTask_id(), JSON.toJSONString(task));
+            return ResultData.getSuccessResult("爬虫停止成功");
+        }catch (NullPointerException ex){
+            return ResultData.getFailResult("爬虫停止失败，任务不存在");
+        }
     }
 }

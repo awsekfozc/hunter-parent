@@ -146,18 +146,15 @@ public class SpriderTest {
         resource_taskRule.put("title_extract_rule", "/html/body/div[2]/dl/dd/h1/a/text()");
         resource_taskRule.put("date_extract_rule", "/html/body/div[2]/dl/dd/p[3]/text()");
         resource_taskRule.put("source_extract_rule", "");
-        resource_taskRule.put("content_extract_rule", "/html/body/div[2]/dl/dd/p[1]/text()");
+        resource_taskRule.put("content_extract_rule", "/h" +
+                "tml/body/div[2]/dl/dd/p[1]/text()");
         resource_taskRule.put("data_source", "民航资源网-用户评论");
         resource_taskRule.put("task_type", 2);
         Jedis jedis = pool.getResource();
         jedis.lpush(SprderConstants.R_RESOURCE_TASK, JSON.toJSONString(resource_taskRule));
         DetailsRule task = JSON.parseObject(jedis.lpop(SprderConstants.R_RESOURCE_TASK), DetailsRule.class);
         System.out.println(task);
-        ExpandSpider.create(new DetailsListProcessor(), pool)
-                .setStartRequest(task.getUrl(), task)
-                .setDistinct(new ContentDistinct())
-                .setPipeline(new ConsolePipeline())
-                .run();
+        ExpandSpider.create(task, pool).run();
     }
 
     @Test

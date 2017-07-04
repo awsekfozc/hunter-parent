@@ -78,7 +78,8 @@ public class ExpandSpider implements Task, Runnable {
     }
 
     public static ExpandSpider create(Rule rule, JedisPool pool) {
-        return new ExpandSpider(ProcessorFactory.initProcessor(rule), pool, rule);
+        HunterPageProcessor pageProcessor = ProcessorFactory.initProcessor(rule);
+        return new ExpandSpider(pageProcessor, pool, rule);
     }
 
     public ExpandSpider(HunterPageProcessor pageProcessor, JedisPool pool, Rule rule) {
@@ -240,10 +241,10 @@ public class ExpandSpider implements Task, Runnable {
     private void checkRunningStat() throws NoGetReadyException {
         if (startRequestMap.size() == 0)
             throw new NoGetReadyException("初始请求未设置");
-        else if (scheduler == null)
-            throw new NoGetReadyException("资源调度器未设置");
-        else if (distinct == null)
-            throw new NoGetReadyException("去重规则未设置");
+//        else if (scheduler == null)
+//            throw new NoGetReadyException("资源调度器未设置");
+//        else if (distinct == null)
+//            throw new NoGetReadyException("去重规则未设置");
     }
 
     public ExpandSpider setUUID(String uuid) {
