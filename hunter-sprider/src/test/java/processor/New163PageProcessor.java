@@ -21,8 +21,6 @@ public class New163PageProcessor implements PageProcessor {
             .setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36")
             .setRetryTimes(3)
             .setSleepTime(1000)
-            .setHttpProxy(new HttpHost("proxy.abuyun.com",9020))
-            .setUsernamePasswordCredentials(new UsernamePasswordCredentials("H9142YEPE0R727DD","B96781AC19AC1926"))
             .addHeader("Accept","*/*");
 
     String rule = "http://news.163.com/(\\d+)/(\\d+)/(\\d+)/(\\w+).html";

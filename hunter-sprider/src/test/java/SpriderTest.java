@@ -118,6 +118,7 @@ public class SpriderTest {
                 "    \"search_wrods\": \"南航,航空,南方航空\",\n" +
                 "    \"source_extract_rule\": \"\",\n" +
                 "    \"task_id\": \"10002\",\n" +
+                "    \"is_proxy\": \"1\",\n" +
                 "    \"task_type\": \"1\",\n" +
                 "    \"title_extract_rule\": \"//*[@id=\\\"artibodyTitle\\\"]/text()\\t\",\n" +
                 "    \"url\": \"http://search.sina.com.cn/?q=%C4%CF%BA%BD&range=all&c=news&sort=time\"\n" +
@@ -168,7 +169,7 @@ public class SpriderTest {
                 return Site.me();
             }
         });
-        spider.test("http://10.92.8.18:9999/blobdiff/bi%2Floong.git/7eae9fc958e4d69f4cdfa6ab92704e5b17ff8c10/loong-web-ui%2Fsrc%2Fmain%2Fjava%2Fcom%2Fcsair%2Floong%2FdataReport%2Fcontroller%2FLoadCapacityTimeTask.java");
+        spider.test("https://laod.cn/hosts/2017-google-hosts.html/comment-page-6");
     }
 
     @Test

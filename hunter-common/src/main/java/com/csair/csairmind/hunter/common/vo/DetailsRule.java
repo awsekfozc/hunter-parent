@@ -36,4 +36,7 @@ public class DetailsRule implements Rule {
 
     //任务类型
     private Integer task_type;
+
+    //是否启用代理
+    private Integer is_proxy = 0;
 }

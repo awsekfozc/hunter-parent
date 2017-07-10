@@ -12,4 +12,6 @@ public interface Rule extends Serializable {
     Integer getDistinct_type();
 
     Integer getPipeline_type();
+
+    Integer getIs_proxy();
 }

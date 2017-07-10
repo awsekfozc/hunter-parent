@@ -3,10 +3,13 @@ package com.csair.csairmind.hunter.spider.factory;
 import com.csair.csairmind.hunter.common.vo.DetailsRule;
 import com.csair.csairmind.hunter.common.vo.ResourceRule;
 import com.csair.csairmind.hunter.common.vo.Rule;
+import com.csair.csairmind.hunter.plugs.proxy.IpProxyPulg;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsListProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.HunterPageProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.ResourcesProcessor;
+import org.apache.http.HttpHost;
+import us.codecraft.webmagic.Site;
 
 import static com.csair.csairmind.hunter.common.enums.SpriderEnums.DETAILS_LIST_PRO;
 

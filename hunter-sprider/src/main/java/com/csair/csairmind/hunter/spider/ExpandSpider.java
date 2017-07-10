@@ -3,6 +3,7 @@ package com.csair.csairmind.hunter.spider;
 import com.csair.csairmind.hunter.common.constant.DataConstants;
 import com.csair.csairmind.hunter.common.util.SimHash;
 import com.csair.csairmind.hunter.common.vo.Rule;
+import com.csair.csairmind.hunter.plugs.proxy.IpProxyPulg;
 import com.csair.csairmind.hunter.spider.distinct.ContentDistinct;
 import com.csair.csairmind.hunter.spider.distinct.Distinct;
 import com.csair.csairmind.hunter.spider.distinct.UrlDistinct;
@@ -30,6 +31,8 @@ import us.codecraft.webmagic.downloader.Downloader;
 import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.pipeline.Pipeline;
+import us.codecraft.webmagic.proxy.Proxy;
+import us.codecraft.webmagic.proxy.SimpleProxyProvider;
 import us.codecraft.webmagic.scheduler.Scheduler;
 
 import java.io.Closeable;
@@ -85,6 +88,13 @@ public class ExpandSpider implements Task, Runnable {
     public ExpandSpider(HunterPageProcessor pageProcessor, JedisPool pool, Rule rule) {
         RedisFactory.init(pool);
         if (rule != null) {
+            HttpClientDownloader downloader = new HttpClientDownloader();
+            if(rule.getIs_proxy() == 1){
+                //代理设置
+                IpProxyPulg proxy = new IpProxyPulg(RedisFactory.getInstance());
+                downloader.setProxyProvider(SimpleProxyProvider.from(new Proxy(proxy.getProxyHost(),proxy.getProxyPort(),proxy.getProxyUserName(),proxy.getProxyPassWord())));
+            }
+            this.setDownloader(downloader);
             this.setScheduler(new ResourceTaskScheduler());
             this.setIncrement(new ResourceTaskIncrement());
             this.setPipeline(PipelineFactory.initPipeline(rule));
@@ -123,10 +133,7 @@ public class ExpandSpider implements Task, Runnable {
      */
     protected void processResourceRequest(Request request, Rule rule) {
         Page page = this.downloader.download(request, this);
-        if (page == null) {
-        } else if (page.isNeedCycleRetry()) {
-            this.extractAndAddRequests(page, true, rule);
-        } else {
+        if (page.isDownloadSuccess()) {
             this.pageProcessor.process(page, rule);
             this.extractAndAddRequests(page, this.spawnUrl, rule);
         }

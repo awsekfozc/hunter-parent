@@ -1,5 +1,6 @@
 package com.csair.csairmind.hunter.spider.site;
 
+import org.apache.http.auth.UsernamePasswordCredentials;
 import us.codecraft.webmagic.Site;
 
 /**

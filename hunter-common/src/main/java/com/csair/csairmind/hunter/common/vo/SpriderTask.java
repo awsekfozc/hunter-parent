@@ -50,5 +50,7 @@ public class SpriderTask implements Serializable {
     private Integer task_status;
     //关键字编码格式
     private String wrod_code;
+    //是否启用代理
+    private Integer is_proxy;
 
 }

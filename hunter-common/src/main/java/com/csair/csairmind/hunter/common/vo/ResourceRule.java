@@ -69,12 +69,16 @@ public class ResourceRule implements Rule {
     //任务类型
     private Integer task_type;
 
+    //是否启用代理
+    private Integer is_proxy = 0;
+
     /***
      * 构造详情所需参数
      * @return
      */
     public Map<String, Object> getDetailsParam() {
         Map<String, Object> map = new HashMap<String, Object>();
+        map.put("is_proxy", is_proxy);
         map.put("url", request_url);
         map.put("distinct_type", distinct_type);
         map.put("title_extract_rule", title_extract_rule);

@@ -14,13 +14,18 @@
     <dependencies>
         <dependency>
             <groupId>com.csair.csairmind.hunter</groupId>
+            <artifactId>hunter-plugin</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.csair.csairmind.hunter</groupId>
             <artifactId>hunter-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>us.codecraft</groupId>
             <artifactId>webmagic-core</artifactId>
-            <version>0.6.1</version>
+            <version>0.7.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.google.guava</groupId>
@@ -43,7 +48,7 @@
         <dependency>
             <groupId>us.codecraft</groupId>
             <artifactId>webmagic-extension</artifactId>
-            <version>0.6.1</version>
+            <version>0.7.2</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
