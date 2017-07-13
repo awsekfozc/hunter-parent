@@ -181,7 +181,7 @@ public class ExpandSpider implements Task, Runnable {
                     } else if (distinct instanceof ContentDistinct && distinct != null) {//如果是内容去重
                         //内容去重的条件为标题+时间
                         String content = String.format("%s,%s", map.get(DataConstants.TITLE), map.get(DataConstants.DATE_TIME));
-                        distinctCode = SimHash.getSimCode(content);
+                        distinctCode = SimHash.getSimCode(content);//生成内容签名
                         if (distinct.isDistinct(content))//如果存在URL，不添加到资源池中
                             continue;
                     }

@@ -80,4 +80,8 @@ public class SpriderSubmitRequest {
     @ApiModelProperty(value = "爬取的最大页数", required = false)
     private String max_page_size;
 
+    //是否启用代理
+    @ApiModelProperty(value = "是否启用代理", required = true)
+    private Integer is_proxy;
+
 }

@@ -3,15 +3,11 @@ import com.csair.csairmind.hunter.common.constant.SprderConstants;
 import com.csair.csairmind.hunter.common.vo.DetailsRule;
 import com.csair.csairmind.hunter.common.vo.ResourceRule;
 import com.csair.csairmind.hunter.spider.ExpandSpider;
-import com.csair.csairmind.hunter.spider.distinct.ContentDistinct;
 import com.csair.csairmind.hunter.spider.factory.DistinctFactory;
-import com.csair.csairmind.hunter.spider.increment.ResourceTaskIncrement;
-import com.csair.csairmind.hunter.spider.processor.currency.DetailsListProcessor;
-import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
 import com.csair.csairmind.hunter.spider.processor.currency.ResourcesProcessor;
 import com.csair.csairmind.hunter.spider.schedule.ResourceTaskScheduler;
-import org.apache.http.HttpHost;
-import org.apache.http.auth.UsernamePasswordCredentials;
+import lombok.ToString;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.junit.Before;
 import org.junit.Test;
 import redis.clients.jedis.Jedis;
@@ -23,6 +19,7 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -147,8 +144,7 @@ public class SpriderTest {
         resource_taskRule.put("title_extract_rule", "/html/body/div[2]/dl/dd/h1/a/text()");
         resource_taskRule.put("date_extract_rule", "/html/body/div[2]/dl/dd/p[3]/text()");
         resource_taskRule.put("source_extract_rule", "");
-        resource_taskRule.put("content_extract_rule", "/h" +
-                "tml/body/div[2]/dl/dd/p[1]/text()");
+        resource_taskRule.put("content_extract_rule", "/html/body/div[2]/dl/dd/p[1]/text()");
         resource_taskRule.put("data_source", "民航资源网-用户评论");
         resource_taskRule.put("task_type", 2);
         Jedis jedis = pool.getResource();
@@ -162,14 +158,23 @@ public class SpriderTest {
     public void testSprider() {
         Spider spider = new Spider(new PageProcessor() {
             public void process(Page page) {
-                System.out.println(page.getHtml());
+                try {
+                    System.out.println(UnicodeUtils.unicode2String(StringEscapeUtils.unescapeHtml(page.getHtml().get())));
+//                    System.out.println(URLDecoder.decode(page.getHtml().get(),"UTF-8"));
+                }catch (Exception ex){
+
+                }finally {
+
+                }
             }
 
             public Site getSite() {
-                return Site.me();
+                return Site.me().setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36");
             }
         });
-        spider.test("https://laod.cn/hosts/2017-google-hosts.html/comment-page-6");
+        spider.addPipeline(new ConsolePipeline())
+                .addUrl("http://detail.zol.com.cn/xhr_Header_WTrendEnter_proIds=p1165386-p1167931-p1166827%5EuserId=%5Ecallback=WtrendCallback.GetFollow.html?_=1499847789493")
+                .run();
     }
 
     @Test
@@ -182,5 +187,11 @@ public class SpriderTest {
                 .setStartRequest(task.getUrl(), task)
                 .setDistinct(DistinctFactory.getInstance(task.getDistinct_type()))
                 .run();
+    }
+
+    @Test
+    public void testToString(){
+        Jedis jedis = pool.getResource();
+        System.out.println(jedis);
     }
 }

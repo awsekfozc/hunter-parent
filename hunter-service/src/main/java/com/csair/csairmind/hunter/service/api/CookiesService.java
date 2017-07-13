@@ -26,7 +26,7 @@ public class CookiesService {
 
     @ApiOperation(value = "测试自动登陆的账号密码")
     @PostMapping("/test")
-    public ResultData taskUserAndPwd(@Valid @RequestBody List<CheckUserRequest> request, HttpServletResponse httpServletResponse) {
+    public ResultData testUserAndPwd(@Valid @RequestBody List<CheckUserRequest> request, HttpServletResponse httpServletResponse) {
         return null;
     }
 }
