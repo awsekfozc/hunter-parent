@@ -10,6 +10,9 @@ import java.io.Serializable;
 @Data
 public class DetailsRule implements Rule {
 
+    //任务编号
+    private String task_id;
+
     //持久化类型
     private Integer pipeline_type = 0;
 

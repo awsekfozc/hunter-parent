@@ -38,6 +38,7 @@ public class DetailsListProcessor implements HunterPageProcessor {
         if (CollectionUtils.isNotEmpty(titles)) {
             Map<String,Object> data = new HashMap<>();
             for (int i = 0; i < titles.size(); i++) {
+                data.put(DataConstants.TASK_ID,rule.getTask_id());
                 data.put(DataConstants.TITLE,titles.get(i));
                 data.put(DataConstants.DATE_TIME,dates.get(i));
                 data.put(DataConstants.CONTENT,contents.get(i));

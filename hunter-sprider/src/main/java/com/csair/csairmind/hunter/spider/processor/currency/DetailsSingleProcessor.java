@@ -24,6 +24,7 @@ public class DetailsSingleProcessor implements HunterPageProcessor {
     @Override
     public void process(Page page,Rule rule) {
         this.setRule((DetailsRule)rule);
+        page.putField(DataConstants.TASK_ID,rule.getTask_id());
         page.putField(DataConstants.TITLE, page.getHtml().xpath(this.rule.getTitle_extract_rule()).get());
         page.putField(DataConstants.DATE_TIME, page.getHtml().xpath(this.rule.getDate_extract_rule()).get());
         page.putField(DataConstants.CONTENT, ContentUtils.removeUrlContent(page.getHtml().xpath(this.rule.getContent_extract_rule()).get()));

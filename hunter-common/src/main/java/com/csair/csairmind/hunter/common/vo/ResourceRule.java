@@ -15,6 +15,7 @@ import java.util.Map;
 @ToString
 public class ResourceRule implements Rule {
 
+
     //详情URL表达式
     private String details_url_reg;
 
@@ -87,6 +88,7 @@ public class ResourceRule implements Rule {
         map.put("content_extract_rule", content_extract_rule);
         map.put("data_source", data_source);
         map.put("task_type", task_type);
+        map.put("task_id", task_id);
         return map;
     }
 }

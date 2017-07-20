@@ -7,6 +7,9 @@ package com.csair.csairmind.hunter.common.constant;
 public class DataConstants {
 
     //标题
+    public static final String TASK_ID = "task_id";
+
+    //标题
     public static final String TITLE = "title";
 
     //时间

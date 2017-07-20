@@ -21,8 +21,12 @@ public class MachineInfo implements Serializable {
      */
     private String sessionKey;
 
+    //mac地址
     private String mac;
+    //ip
     private String ip;
+    //注册时间
     private String regTime;
+    //更新时间
     private String updateTime;
 }

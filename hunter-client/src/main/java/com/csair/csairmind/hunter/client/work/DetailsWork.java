@@ -1,5 +1,6 @@
 package com.csair.csairmind.hunter.client.work;
 
+import com.csair.csairmind.hunter.common.config.KafkaConfig;
 import com.csair.csairmind.hunter.common.config.RedisConfigVo;
 import com.csair.csairmind.hunter.common.request.DetalisTaskRequest;
 import com.csair.csairmind.hunter.common.request.OperateResult;
@@ -7,6 +8,7 @@ import com.csair.csairmind.hunter.common.response.ApiResponse;
 import com.csair.csairmind.hunter.common.response.DetalisTaskResponse;
 import com.csair.csairmind.hunter.common.vo.DetailsRule;
 import com.csair.csairmind.hunter.spider.ExpandSpider;
+import com.csair.csairmind.hunter.spider.pipeline.KafkaPipeline;
 import com.csair.csairmind.hunter.spider.processor.currency.DetailsSingleProcessor;
 import com.csair.csairmind.hunter.spider.schedule.ResourceTaskScheduler;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,9 @@ public class DetailsWork extends BaseThread {
     @Autowired
     RedisConfigVo redisConfigVo;
 
+    @Autowired
+    KafkaConfig kafkaConfig;
+
     @Override
     public void doing() {
         super.initClient();
@@ -48,6 +53,7 @@ public class DetailsWork extends BaseThread {
                     log.info("开始执行详情解析任务");
                     ExpandSpider.
                             create(rule, new JedisPool(redisConfigVo.getHostName()))
+                            .setPipeline(KafkaPipeline.getInstance(kafkaConfig.getTopic(),kafkaConfig.getHost(),kafkaConfig.getPort()))
                             .run();
                 }
             }

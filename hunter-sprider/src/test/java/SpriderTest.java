@@ -16,8 +16,11 @@ import redis.clients.jedis.JedisPoolConfig;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.proxy.Proxy;
+import us.codecraft.webmagic.proxy.SimpleProxyProvider;
 
 import java.net.URLDecoder;
 import java.util.HashMap;
@@ -172,8 +175,12 @@ public class SpriderTest {
                 return Site.me().setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36");
             }
         });
+        HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
+        httpClientDownloader.setProxyProvider(SimpleProxyProvider.from(
+                new Proxy("123.169.90.18",32245)));
+        spider.setDownloader(httpClientDownloader);
         spider.addPipeline(new ConsolePipeline())
-                .addUrl("http://detail.zol.com.cn/xhr_Header_WTrendEnter_proIds=p1165386-p1167931-p1166827%5EuserId=%5Ecallback=WtrendCallback.GetFollow.html?_=1499847789493")
+                .addUrl("www.amazon.com")
                 .run();
     }
 

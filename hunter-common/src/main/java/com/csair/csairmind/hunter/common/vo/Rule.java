@@ -14,4 +14,7 @@ public interface Rule extends Serializable {
     Integer getPipeline_type();
 
     Integer getIs_proxy();
+
+    String getTask_id();
+
 }
